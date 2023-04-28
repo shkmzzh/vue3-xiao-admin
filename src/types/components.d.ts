@@ -32,6 +32,7 @@ declare module '@vue/runtime-core' {
     IEpSetting: typeof import('~icons/ep/setting')['default']
     LangSelect: typeof import('./../components/LangSelect/index.vue')['default']
     Pagination: typeof import('./../components/Pagination/index.vue')['default']
+    RightPanel: typeof import('./../components/RightPanel/index.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     Screenfull: typeof import('./../components/Screenfull/index.vue')['default']

@@ -1,47 +1,55 @@
-import { defineStore } from 'pinia';
-import defaultSettings from '@/settings';
-import { useStorage } from '@vueuse/core';
+import { defineStore } from 'pinia'
+import defaultSettings from '@/settings'
+import { useStorage } from '@vueuse/core'
 
 export const useSettingsStore = defineStore('setting', () => {
   // state
-  const tagsView = useStorage<boolean>('tagsView', defaultSettings.tagsView);
+  const tagsView = useStorage<boolean>('tagsView', defaultSettings.tagsView)
 
-  const showSettings = ref<boolean>(defaultSettings.showSettings);
-  const fixedHeader = ref<boolean>(defaultSettings.fixedHeader);
-  const sidebarLogo = ref<boolean>(defaultSettings.sidebarLogo);
+  const showSettings = ref<boolean>(defaultSettings.showSettings)
+  const fixedHeader = ref<boolean>(defaultSettings.fixedHeader)
+  const sidebarLogo = ref<boolean>(defaultSettings.sidebarLogo)
 
-  const layout = useStorage<string>('layout', defaultSettings.layout);
-
+  const layout = useStorage<string>('layout', defaultSettings.layout)
+  const themeColor = useStorage<number>('themeColor', defaultSettings.themeColor)
+  const openSetting = ref<boolean>(false)
   // actions
   function changeSetting(param: { key: string; value: any }) {
-    const { key, value } = param;
+    const { key, value } = param
     switch (key) {
       case 'showSettings':
-        showSettings.value = value;
-        break;
+        showSettings.value = value
+        break
       case 'fixedHeader':
-        fixedHeader.value = value;
-        break;
+        fixedHeader.value = value
+        break
       case 'tagsView':
-        tagsView.value = value;
-        break;
+        tagsView.value = value
+        break
       case 'sidevarLogo':
-        sidebarLogo.value = value;
-        break;
+        sidebarLogo.value = value
+        break
       case 'layout':
-        layout.value = value;
-        break;
+        layout.value = value
+        break
+      case 'themeColor':
+        themeColor.value = value
       default:
-        break;
+        break
     }
   }
 
+  function ShowSettingBtn(){
+
+  }
   return {
     showSettings,
     tagsView,
     fixedHeader,
     sidebarLogo,
     layout,
+    themeColor,
+    openSetting,
     changeSetting
-  };
-});
+  }
+})

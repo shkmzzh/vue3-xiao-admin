@@ -1,5 +1,5 @@
 export interface MenuObject extends Object {
-  themeColors?: string; //主题色
+  themeColor: string; //主题色
 
   menuBg?: string; // 菜单背景色
   menuText?: string; // 菜单文字颜色
@@ -15,7 +15,7 @@ export interface MenuObject extends Object {
 
 export const themeColorList = ref<MenuObject[]>([
   {
-    themeColors:'#1b2a47', // 默认主题色
+    themeColor:'#4091f7', // 默认主题色
 
     menuBg: "#001529", 
     menuText: "rgb(254 254 254 / 65%)",
@@ -29,26 +29,32 @@ export const themeColorList = ref<MenuObject[]>([
     menuTitleHover: "transparent", 
   },
   {
-    themeColors:'red',
-    subMenuActiveText: "#409eff",
-    menuBg: "#fff",
-    menuHover: "#e0ebf6",
-    subMenuBg: "#fff",
-    subMenuActiveBg: "#e0ebf6",
-    menuText: "#7a80b4",
-    sidebarLogo: "#fff",
-    menuTitleHover: "#000",
+    themeColor:'#e13c39',  // 红色
+
+    menuBg: "#2b0e05", 
+    menuText: "rgb(254 254 254 / 65.1%)",
+    subMenuBg: "#000", 
+    subMenuActiveBg: "#e13c39", 
+    subMenuActiveText: "#fff",
+    subMenuHover:'#000',
+    sidebarLogo: "#42090c", 
+
+    menuHover: "transparent", 
+    menuTitleHover: "transparent", 
 
   },
   {
-    themeColors:'yellow',
+    themeColor:'#693ac9', // 紫色
+
+    menuBg: "#130824", 
+    menuText: "#7a80b4",
+    subMenuBg: "#000", 
+    subMenuActiveBg: "#693ac9", 
     subMenuActiveText: "#fff",
-    menuBg: "#2a0608",
-    menuHover: "#e13c39",
-    subMenuBg: "#000",
-    subMenuActiveBg: "#e13c39",
-    menuText: "rgb(254 254 254 / 65.1%)",
-    sidebarLogo: "#42090c",
-    menuTitleHover: "#fff",
+    subMenuHover:'#000',
+    sidebarLogo: "#1f0c38", 
+
+    menuHover: "transparent", 
+    menuTitleHover: "transparent", 
   },
 ])

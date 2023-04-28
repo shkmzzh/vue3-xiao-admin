@@ -18,10 +18,8 @@ function changeLayout(layout: string) {
 }
 
 // 主题颜色
-const themeColors = ref<string[]>(['#409EFF', '#304156', '#4954E6', '#13c2c2', '#6959CD', '#f5222d'])
-
 const MenuObjectSaveKey: Map<string, string> = new Map<string, string>()
-MenuObjectSaveKey.set('menuBg', '--menubg')
+MenuObjectSaveKey.set('menuBg', '--menuBg')
   .set('menuText', '--menuText')
   .set('menuActiveText', 'menuActiveText')
   .set('menuHover', '--menuHover')
@@ -42,22 +40,26 @@ const activeColor = ref<number>(0)
  */
 function changeThemeColor(color: MenuObject, index: number) {
   MenuObjectSaveKey.forEach(key => document.documentElement.style.removeProperty(key))
-
+  const styleList: MenuObjectUse[] = []
   for (const [key, value] of Object.entries(color)) {
-    const styleList: MenuObjectUse[] = []
+   
     if (MenuObjectSaveKey.has(key))
       styleList.push({
         key: MenuObjectSaveKey.get(key) as '', //menubg
         value: value // #xxx
       })
-    styleList.forEach(item => document.documentElement.style.setProperty(item.key, item.value))
+      console.log(styleList);
+      
+    
   }
-
-  settingsStore.changeSetting({ key: 'layout', value: color })
+  styleList.forEach(item => document.documentElement.style.setProperty(item.key, item.value))
+  document.documentElement.style.setProperty("--el-color-primary", color.themeColor);
+  settingsStore.changeSetting({ key: 'themeColor', value: index })
   activeColor.value = index
 }
 
 onMounted(() => {
+  changeThemeColor(themeColorList.value[Number(settingsStore.themeColor)],Number(settingsStore.themeColor))
   window.document.body.setAttribute('layout', settingsStore.layout)
 })
 </script>
@@ -102,7 +104,7 @@ onMounted(() => {
         class="inline-block w-[30px] h-[30px] cursor-pointer"
         v-for="(color, index) in themeColorList"
         :key="index"
-        :style="{ background: color.themeColors }"
+        :style="{ background: color.themeColor }"
         @click="changeThemeColor(color, index)"
         :class="{ 'active-color': activeColor == index }"
       ></li>
@@ -216,7 +218,7 @@ onMounted(() => {
   }
 }
 
-::v-deep .el-switch__core .el-switch__inner .is-icon {
+ .el-switch__core .el-switch__inner :deep(.is-icon) {
   font-size: 14px;
 }
 

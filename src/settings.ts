@@ -3,42 +3,46 @@ interface DefaultSettings {
   /**
    * 系统title
    */
-  title: string;
+  title: string
 
   /**
    * 是否显示设置
    */
-  showSettings: boolean;
+  showSettings: boolean
   /**
    * 是否显示多标签导航
    */
-  tagsView: boolean;
+  tagsView: boolean
   /**
    *是否固定头部
    */
-  fixedHeader: boolean;
+  fixedHeader: boolean
   /**
    * 是否显示侧边栏Logo
    */
-  sidebarLogo: boolean;
+  sidebarLogo: boolean
   /**
    * 导航栏布局
    */
-  layout: string;
+  layout: string
   /**
    * 主题模式
    */
-  theme: string;
+  theme: string
 
   /**
    * 布局大小
    */
-  size: string;
+  size: string
 
   /**
    * 语言
    */
-  language: string;
+  language: string
+  /**
+   * 主题色
+   */
+  themeColor: number
 }
 
 const defaultSettings: DefaultSettings = {
@@ -56,7 +60,8 @@ const defaultSettings: DefaultSettings = {
    */
   theme: 'dark',
   size: 'default', // default |large |small
-  language: 'zh-cn' // zh-cn| en
-};
+  language: 'zh-cn', // zh-cn| en
+  themeColor: 1
+}
 
-export default defaultSettings;
+export default defaultSettings

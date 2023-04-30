@@ -29,11 +29,9 @@ function push() {
 </script>
 
 <template>
-  <!-- 如果输入的是 www.baidu.com 这种链接就跳转 -->
   <a v-if="isExternal(to)" :href="to" target="_blank" rel="noopener">
     <slot />
   </a>
-  <!-- 否则跳路由的 path 路径 -->
   <div v-else @click="push">
     <slot />
   </div>

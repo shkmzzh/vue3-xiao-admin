@@ -2,7 +2,7 @@
 import { useSettingsStore } from '@/store/modules/settings'
 import sunnyIcon from '@/assets/icons/sunny.svg'
 import moonIcon from '@/assets/icons/moon.svg'
-import {themeColorList,MenuObject} from '@/layout/components/theme'
+import { themeColorList, MenuObject } from '@/layout/components/theme'
 /**
  * 暗黑模式
  */
@@ -42,15 +42,15 @@ function changeThemeColor(color: MenuObject, index: number) {
   MenuObjectSaveKey.forEach(key => document.documentElement.style.removeProperty(key))
   const styleList: MenuObjectUse[] = []
   for (const [key, value] of Object.entries(color)) {
-   
+
     if (MenuObjectSaveKey.has(key))
       styleList.push({
         key: MenuObjectSaveKey.get(key) as '', //menubg
         value: value // #xxx
       })
-      console.log(styleList);
-      
-    
+    console.log(styleList);
+
+
   }
   styleList.forEach(item => document.documentElement.style.setProperty(item.key, item.value))
   document.documentElement.style.setProperty("--el-color-primary", color.themeColor);
@@ -59,26 +59,19 @@ function changeThemeColor(color: MenuObject, index: number) {
 }
 
 onMounted(() => {
-  changeThemeColor(themeColorList.value[Number(settingsStore.themeColor)],Number(settingsStore.themeColor))
+  changeThemeColor(themeColorList.value[Number(settingsStore.themeColor)], Number(settingsStore.themeColor))
   window.document.body.setAttribute('layout', settingsStore.layout)
 })
 </script>
 
 <template>
   <div class="settings-container">
+    <h3 class="text-base font-bold">项目配置</h3>
     <el-divider>主题</el-divider>
 
     <div class="flex justify-center" @click.stop>
-      <el-switch
-        v-model="isDark"
-        size="large"
-        @change="toggleDark"
-        inline-prompt
-        :active-icon="sunnyIcon"
-        :inactive-icon="moonIcon"
-        active-color="var(--el-fill-color-dark)"
-        inactive-color="var(--el-color-primary)"
-      />
+      <el-switch v-model="isDark" size="large" @change="toggleDark" inline-prompt :active-icon="sunnyIcon"
+        :inactive-icon="moonIcon" active-color="var(--el-fill-color-dark)" inactive-color="var(--el-color-primary)" />
     </div>
 
     <el-divider>界面设置</el-divider>
@@ -100,33 +93,31 @@ onMounted(() => {
     <el-divider>主题颜色</el-divider>
 
     <ul class="w-full space-x-2 flex justify-center py-2">
-      <li
-        class="inline-block w-[30px] h-[30px] cursor-pointer"
-        v-for="(color, index) in themeColorList"
-        :key="index"
-        :style="{ background: color.themeColor }"
-        @click="changeThemeColor(color, index)"
-        :class="{ 'active-color': activeColor == index }"
-      ></li>
+      <li class="inline-block w-[30px] h-[30px] cursor-pointer" v-for="(color, index) in themeColorList" :key="index"
+        :style="{ background: color.themeColor }" @click="changeThemeColor(color, index)"
+        :class="{ 'active-color': activeColor == index }"></li>
     </ul>
 
     <el-divider>导航设置</el-divider>
 
     <ul class="layout">
       <el-tooltip content="左侧模式" placement="bottom">
-        <li :class="'layout-item layout-left ' + (settingsStore.layout == 'left' ? 'is-active' : '')" @click="changeLayout('left')">
+        <li :class="'layout-item layout-left ' + (settingsStore.layout == 'left' ? 'is-active' : '')"
+          @click="changeLayout('left')">
           <div />
           <div />
         </li>
       </el-tooltip>
       <el-tooltip content="顶部模式" placement="bottom">
-        <li :class="'layout-item layout-top ' + (settingsStore.layout == 'top' ? 'is-active' : '')" @click="changeLayout('top')">
+        <li :class="'layout-item layout-top ' + (settingsStore.layout == 'top' ? 'is-active' : '')"
+          @click="changeLayout('top')">
           <div />
           <div />
         </li>
       </el-tooltip>
       <el-tooltip content="混合模式" placement="bottom">
-        <li :class="'layout-item layout-mix ' + (settingsStore.layout == 'mix' ? 'is-active' : '')" @click="changeLayout('mix')">
+        <li :class="'layout-item layout-mix ' + (settingsStore.layout == 'mix' ? 'is-active' : '')"
+          @click="changeLayout('mix')">
           <div />
           <div />
         </li>
@@ -137,6 +128,8 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 .settings-container {
+  padding: 16px;
+
   .layout {
     display: flex;
     flex-wrap: wrap;
@@ -218,7 +211,7 @@ onMounted(() => {
   }
 }
 
- .el-switch__core .el-switch__inner :deep(.is-icon) {
+.el-switch__core .el-switch__inner :deep(.is-icon) {
   font-size: 14px;
 }
 

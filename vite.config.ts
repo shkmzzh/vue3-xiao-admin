@@ -41,7 +41,7 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
     server: {
       host: '0.0.0.0',
       port: Number(env.VITE_APP_PORT),
-      //open: true,
+      open: true,
       // 反向代理解决跨域
       proxy: {
         [env.VITE_APP_BASE_API]: {

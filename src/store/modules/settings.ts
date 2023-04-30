@@ -12,7 +12,6 @@ export const useSettingsStore = defineStore('setting', () => {
 
   const layout = useStorage<string>('layout', defaultSettings.layout)
   const themeColor = useStorage<number>('themeColor', defaultSettings.themeColor)
-  const openSetting = ref<boolean>(false)
   // actions
   function changeSetting(param: { key: string; value: any }) {
     const { key, value } = param
@@ -38,10 +37,6 @@ export const useSettingsStore = defineStore('setting', () => {
         break
     }
   }
-
-  function ShowSettingBtn(){
-
-  }
   return {
     showSettings,
     tagsView,
@@ -49,7 +44,6 @@ export const useSettingsStore = defineStore('setting', () => {
     sidebarLogo,
     layout,
     themeColor,
-    openSetting,
     changeSetting
   }
 })

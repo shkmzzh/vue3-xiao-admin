@@ -11,8 +11,13 @@ html.dark {
   .navbar {
     background-color: var(--el-bg-color);
     color: var(--el-text-color-regular);
-    .navbar-setting-item:hover {
-      background: var(--el-fill-color-light);
+    .navbar-setting-item,.setting{
+      &:hover {
+        background: var(--el-fill-color-light);
+      }
+    }
+    .setting{
+      color: var(--el-text-color-regular);
     }
   }
 

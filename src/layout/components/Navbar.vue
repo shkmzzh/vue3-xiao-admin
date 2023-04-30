@@ -5,8 +5,10 @@ import { useAppStore } from '@/store/modules/app'
 import { useTagsViewStore } from '@/store/modules/tagsView'
 import { useUserStore } from '@/store/modules/user'
 import { useSettingsStore } from '@/store/modules/settings'
-import { ref } from 'vue'
+import RightPanel from '@/components/RightPanel/index.vue'
 import Setting from '@/layout/components/Settings/index.vue'
+import { ref } from 'vue'
+
 const settingsStore = useSettingsStore()
 const showSettings = computed(() => settingsStore.showSettings)
 const appStore = useAppStore()
@@ -22,7 +24,7 @@ function toggleSideBar() {
   appStore.toggleSidebar(true)
 }
 // 设置面板
-const isShow = ref(false)
+const show = ref(false)
 </script>
 
 <template>
@@ -49,14 +51,14 @@ const isShow = ref(false)
         <lang-select class="navbar-setting-item" />
         <!-- 设置面板 -->
       </div>
-      <div class="setting" @click="isShow = true">
+      <div class="setting" @click.stop="show = true">
         <i-ep-setting />
       </div>
     </div>
   </div>
-  <el-drawer v-model="isShow" title="项目配置" size="315px">
-   <Setting></Setting>
-  </el-drawer>
+  <RightPanel v-model:show="show">
+    <Setting></Setting>
+  </RightPanel>
 </template>
 
 <style lang="scss" scoped>
@@ -77,10 +79,12 @@ const isShow = ref(false)
     cursor: pointer;
     text-align: center;
     color: #5a5e66;
+
     &:hover {
       background: rgba(249, 250, 251, 1);
     }
   }
+
   .setting {
     width: 45px;
     line-height: 53px;

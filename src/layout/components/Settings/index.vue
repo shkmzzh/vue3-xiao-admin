@@ -16,6 +16,12 @@ function changeLayout(layout: string) {
   settingsStore.changeSetting({ key: 'layout', value: layout })
   window.document.body.setAttribute('layout', settingsStore.layout)
 }
+/**
+ * 切换侧边栏风格
+ */
+// function changeSidebarStyle() {
+//  settingsStore.changeSetting({key:'style',value:style})
+// }
 
 // 主题颜色
 const MenuObjectSaveKey: Map<string, string> = new Map<string, string>()
@@ -98,7 +104,7 @@ onMounted(() => {
         :class="{ 'active-color': activeColor == index }"></li>
     </ul>
 
-    <el-divider>导航设置</el-divider>
+    <el-divider>导航栏模式</el-divider>
 
     <ul class="layout">
       <el-tooltip content="左侧模式" placement="bottom">
@@ -118,6 +124,23 @@ onMounted(() => {
       <el-tooltip content="混合模式" placement="bottom">
         <li :class="'layout-item layout-mix ' + (settingsStore.layout == 'mix' ? 'is-active' : '')"
           @click="changeLayout('mix')">
+          <div />
+          <div />
+        </li>
+      </el-tooltip>
+    </ul>
+    <el-divider>导航栏风格</el-divider>
+    <ul class="layout">
+      <el-tooltip content="暗色侧边栏" placement="bottom">
+        <li :class="'layout-item layout-dark ' + (settingsStore.layout == 'dark' ? 'is-active' : '')"
+          @click="changeLayout('dark')">
+          <div />
+          <div />
+        </li>
+      </el-tooltip>
+      <el-tooltip content="白色侧边栏" placement="bottom">
+        <li :class="'layout-item layout-light ' + (settingsStore.layout == 'light' ? 'is-active' : '')"
+          @click="changeLayout('light')">
           <div />
           <div />
         </li>
@@ -145,6 +168,7 @@ onMounted(() => {
       overflow: hidden;
       cursor: pointer;
       border-radius: 4px;
+
     }
 
     &-item.is-active {
@@ -152,6 +176,8 @@ onMounted(() => {
     }
 
     &-left {
+      box-shadow: 2px 2px 5px #767474;
+
       div {
         &:nth-child(1) {
           width: 30%;
@@ -172,6 +198,8 @@ onMounted(() => {
     }
 
     &-top {
+      box-shadow: 2px 2px 5px #767474;
+
       div {
         &:nth-child(1) {
           width: 100%;
@@ -183,6 +211,8 @@ onMounted(() => {
     }
 
     &-mix {
+      box-shadow: 2px 2px 5px #767474;
+
       div {
         &:nth-child(1) {
           width: 100%;
@@ -197,6 +227,50 @@ onMounted(() => {
           bottom: 0;
           left: 0;
           background: #1b2a47;
+          box-shadow: 0 0 1px #888;
+          position: absolute;
+        }
+      }
+    }
+
+    &-light {
+      box-shadow: 2px 2px 5px #767474;
+
+      div {
+        &:nth-child(1) {
+          width: 30%;
+          height: 100%;
+          background: #fff;
+        }
+
+        &:nth-child(2) {
+          width: 70%;
+          height: 30%;
+          top: 0;
+          right: 0;
+          background: #fff;
+          box-shadow: 0 0 1px #888;
+          position: absolute;
+        }
+      }
+    }
+
+    &-dark {
+      box-shadow: 2px 2px 5px #767474;
+
+      div {
+        &:nth-child(1) {
+          width: 30%;
+          height: 100%;
+          background: #1b2a47;
+        }
+
+        &:nth-child(2) {
+          width: 70%;
+          height: 30%;
+          top: 0;
+          right: 0;
+          background: #fff;
           box-shadow: 0 0 1px #888;
           position: absolute;
         }
@@ -230,5 +304,4 @@ onMounted(() => {
     left: 50%;
     transform: translate(-50%, -50%);
   }
-}
-</style>
+}</style>

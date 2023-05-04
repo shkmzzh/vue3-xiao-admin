@@ -8,7 +8,16 @@ import { themeColorList, MenuObject } from '@/layout/components/theme'
  */
 const settingsStore = useSettingsStore()
 const isDark = useDark()
-const toggleDark = () => useToggle(isDark)
+const toggleDark = () => {
+  useToggle(isDark)
+  console.log(isDark.value, 'fdsfsdfsdfd')
+  if (isDark.value) {
+    document.documentElement.classList.remove('light')
+  } else if (settingsStore.sideStyle == 'light') {
+    document.documentElement.classList.add('light')
+  }
+}
+
 /**
  * 切换布局
  */
@@ -19,21 +28,26 @@ function changeLayout(layout: string) {
 /**
  * 切换侧边栏风格
  */
-// function changeSidebarStyle() {
-//  settingsStore.changeSetting({key:'style',value:style})
-// }
+function changeSidebarStyle(style: string) {
+  settingsStore.changeSetting({ key: 'sideStyle', value: style })
+  if (settingsStore.sideStyle == 'light' && isDark.value !== true) {
+    document.documentElement.classList.add('light')
+  } else {
+    document.documentElement.classList.remove('light')
+  }
+}
 
 // 主题颜色
 const MenuObjectSaveKey: Map<string, string> = new Map<string, string>()
 MenuObjectSaveKey.set('menuBg', '--menuBg')
   .set('menuText', '--menuText')
   .set('menuActiveText', 'menuActiveText')
-  .set('menuHover', '--menuHover')
   .set('subMenuBg', '--subMenuBg')
   .set('subMenuActiveBg', '--subMenuActiveBg')
   .set('sidebarLogo', '--sidebarLogo')
-  .set('menuTitleHover', '--menuTitleHover')
   .set('menuActiveBefore', '--menuActiveBefore')
+  .set('subMenuHoverText', '--subMenuHoverText')
+  .set('subActiveText', '--subActiveText')
 
 interface MenuObjectUse {
   key: string
@@ -48,18 +62,15 @@ function changeThemeColor(color: MenuObject, index: number) {
   MenuObjectSaveKey.forEach(key => document.documentElement.style.removeProperty(key))
   const styleList: MenuObjectUse[] = []
   for (const [key, value] of Object.entries(color)) {
-
     if (MenuObjectSaveKey.has(key))
       styleList.push({
         key: MenuObjectSaveKey.get(key) as '', //menubg
         value: value // #xxx
       })
-    console.log(styleList);
-
-
+    console.log(styleList)
   }
   styleList.forEach(item => document.documentElement.style.setProperty(item.key, item.value))
-  document.documentElement.style.setProperty("--el-color-primary", color.themeColor);
+  document.documentElement.style.setProperty('--el-color-primary', color.themeColor)
   settingsStore.changeSetting({ key: 'themeColor', value: index })
   activeColor.value = index
 }
@@ -67,6 +78,9 @@ function changeThemeColor(color: MenuObject, index: number) {
 onMounted(() => {
   changeThemeColor(themeColorList.value[Number(settingsStore.themeColor)], Number(settingsStore.themeColor))
   window.document.body.setAttribute('layout', settingsStore.layout)
+  if (!isDark.value) {
+    changeSidebarStyle(settingsStore.sideStyle)
+  }
 })
 </script>
 
@@ -76,8 +90,16 @@ onMounted(() => {
     <el-divider>主题</el-divider>
 
     <div class="flex justify-center" @click.stop>
-      <el-switch v-model="isDark" size="large" @change="toggleDark" inline-prompt :active-icon="sunnyIcon"
-        :inactive-icon="moonIcon" active-color="var(--el-fill-color-dark)" inactive-color="var(--el-color-primary)" />
+      <el-switch
+        v-model="isDark"
+        size="large"
+        @change="toggleDark"
+        inline-prompt
+        :active-icon="sunnyIcon"
+        :inactive-icon="moonIcon"
+        active-color="var(--el-fill-color-dark)"
+        inactive-color="var(--el-color-primary)"
+      />
     </div>
 
     <el-divider>界面设置</el-divider>
@@ -99,31 +121,33 @@ onMounted(() => {
     <el-divider>主题颜色</el-divider>
 
     <ul class="w-full space-x-2 flex justify-center py-2">
-      <li class="inline-block w-[30px] h-[30px] cursor-pointer" v-for="(color, index) in themeColorList" :key="index"
-        :style="{ background: color.themeColor }" @click="changeThemeColor(color, index)"
-        :class="{ 'active-color': activeColor == index }"></li>
+      <li
+        class="inline-block w-[30px] h-[30px] cursor-pointer"
+        v-for="(color, index) in themeColorList"
+        :key="index"
+        :style="{ background: color.themeColor }"
+        @click="changeThemeColor(color, index)"
+        :class="{ 'active-color': activeColor == index }"
+      ></li>
     </ul>
 
     <el-divider>导航栏模式</el-divider>
 
     <ul class="layout">
       <el-tooltip content="左侧模式" placement="bottom">
-        <li :class="'layout-item layout-left ' + (settingsStore.layout == 'left' ? 'is-active' : '')"
-          @click="changeLayout('left')">
+        <li :class="'layout-item layout-left ' + (settingsStore.layout == 'left' ? 'is-active' : '')" @click="changeLayout('left')">
           <div />
           <div />
         </li>
       </el-tooltip>
       <el-tooltip content="顶部模式" placement="bottom">
-        <li :class="'layout-item layout-top ' + (settingsStore.layout == 'top' ? 'is-active' : '')"
-          @click="changeLayout('top')">
+        <li :class="'layout-item layout-top ' + (settingsStore.layout == 'top' ? 'is-active' : '')" @click="changeLayout('top')">
           <div />
           <div />
         </li>
       </el-tooltip>
       <el-tooltip content="混合模式" placement="bottom">
-        <li :class="'layout-item layout-mix ' + (settingsStore.layout == 'mix' ? 'is-active' : '')"
-          @click="changeLayout('mix')">
+        <li :class="'layout-item layout-mix ' + (settingsStore.layout == 'mix' ? 'is-active' : '')" @click="changeLayout('mix')">
           <div />
           <div />
         </li>
@@ -132,15 +156,13 @@ onMounted(() => {
     <el-divider>导航栏风格</el-divider>
     <ul class="layout">
       <el-tooltip content="暗色侧边栏" placement="bottom">
-        <li :class="'layout-item layout-dark ' + (settingsStore.layout == 'dark' ? 'is-active' : '')"
-          @click="changeLayout('dark')">
+        <li :class="'layout-item layout-dark ' + (settingsStore.sideStyle == 'dark' ? 'is-active' : '')" @click="changeSidebarStyle('dark')">
           <div />
           <div />
         </li>
       </el-tooltip>
       <el-tooltip content="白色侧边栏" placement="bottom">
-        <li :class="'layout-item layout-light ' + (settingsStore.layout == 'light' ? 'is-active' : '')"
-          @click="changeLayout('light')">
+        <li :class="'layout-item layout-light ' + (settingsStore.sideStyle == 'light' ? 'is-active' : '')" @click="changeSidebarStyle('light')">
           <div />
           <div />
         </li>
@@ -168,7 +190,6 @@ onMounted(() => {
       overflow: hidden;
       cursor: pointer;
       border-radius: 4px;
-
     }
 
     &-item.is-active {
@@ -304,4 +325,5 @@ onMounted(() => {
     left: 50%;
     transform: translate(-50%, -50%);
   }
-}</style>
+}
+</style>

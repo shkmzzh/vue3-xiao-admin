@@ -10,6 +10,8 @@
   --sidebarLogo: #002140;
   --menuHover: transparent;
   --menuActiveText: transparent;
+  --subMenuHoverText:#fff;
+  --subActiveText:#fff;
 }
 
 $menuBg: var(--menuBg);
@@ -22,7 +24,8 @@ $subMenuActiveBg: var(--subMenuActiveBg);
 $subMenuActiveText: var(--subMenuActiveText);
 
 $subMenuHover: var(--subMenuHover);
-
+$subMenuHoverText:var(--subMenuHoverText);
 $sidebarLogo: var(--sidebarLogo);
+$subActiveText:var(--subActiveText);
 $sideBarWidth: 210px;
 $muenItemHeight: 50px;

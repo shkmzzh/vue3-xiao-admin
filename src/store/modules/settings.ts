@@ -12,6 +12,7 @@ export const useSettingsStore = defineStore('setting', () => {
 
   const layout = useStorage<string>('layout', defaultSettings.layout)
   const themeColor = useStorage<number>('themeColor', defaultSettings.themeColor)
+  const sideStyle = useStorage<string>('sideStyle', defaultSettings.sideStyle)
   // actions
   function changeSetting(param: { key: string; value: any }) {
     const { key, value } = param
@@ -33,6 +34,10 @@ export const useSettingsStore = defineStore('setting', () => {
         break
       case 'themeColor':
         themeColor.value = value
+        break
+      case 'sideStyle':
+        sideStyle.value = value
+        break
       default:
         break
     }
@@ -44,6 +49,7 @@ export const useSettingsStore = defineStore('setting', () => {
     sidebarLogo,
     layout,
     themeColor,
+    sideStyle,
     changeSetting
   }
 })

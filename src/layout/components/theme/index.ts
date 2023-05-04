@@ -11,6 +11,8 @@ export interface MenuObject extends Object {
   
   menuHover?: string; // 菜单移入色
   menuTitleHover?: string; // 菜单文字移入颜色
+  subMenuHoverText?:string; // 菜单文字移入颜色
+  subActiveText?:string; // 选中当前项文字颜色
 }
 
 export const themeColorList = ref<MenuObject[]>([
@@ -22,11 +24,11 @@ export const themeColorList = ref<MenuObject[]>([
     subMenuBg: "#0f0303", 
     subMenuActiveBg: "#4091f7", 
     subMenuActiveText: "#fff",
-    subMenuHover:'#0f0303',
+    subMenuHoverText:'#fff',
     sidebarLogo: "#002140", 
-
     menuHover: "transparent", 
     menuTitleHover: "transparent", 
+    subActiveText:"#fff"
   },
   {
     themeColor:'#e13c39',  // 红色
@@ -36,12 +38,12 @@ export const themeColorList = ref<MenuObject[]>([
     subMenuBg: "#000", 
     subMenuActiveBg: "#e13c39", 
     subMenuActiveText: "#fff",
-    subMenuHover:'#000',
+    subMenuHoverText:'#fff',
     sidebarLogo: "#42090c", 
 
     menuHover: "transparent", 
     menuTitleHover: "transparent", 
-
+    subActiveText:"#fff"
   },
   {
     themeColor:'#693ac9', // 紫色
@@ -51,10 +53,11 @@ export const themeColorList = ref<MenuObject[]>([
     subMenuBg: "#000", 
     subMenuActiveBg: "#693ac9", 
     subMenuActiveText: "#fff",
-    subMenuHover:'#000',
+    subMenuHoverText:'#fff',
     sidebarLogo: "#1f0c38", 
 
     menuHover: "transparent", 
     menuTitleHover: "transparent", 
+    subActiveText:"#fff"
   },
 ])

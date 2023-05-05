@@ -1,24 +1,26 @@
-import vue from '@vitejs/plugin-vue';
+import vue from '@vitejs/plugin-vue'
 
-import { UserConfig, ConfigEnv, loadEnv, defineConfig } from 'vite';
+import { UserConfig, ConfigEnv, loadEnv, defineConfig, UserConfigExport } from 'vite'
 
-import AutoImport from 'unplugin-auto-import/vite';
-import Components from 'unplugin-vue-components/vite';
-import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
+import AutoImport from 'unplugin-auto-import/vite'
+import Components from 'unplugin-vue-components/vite'
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 
-import Icons from 'unplugin-icons/vite';
-import IconsResolver from 'unplugin-icons/resolver';
-import svgLoader from 'vite-svg-loader';
+import Icons from 'unplugin-icons/vite'
+import IconsResolver from 'unplugin-icons/resolver'
+import svgLoader from 'vite-svg-loader'
 
-import { createSvgIconsPlugin } from 'vite-plugin-svg-icons';
+import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 
-import UnoCSS from 'unocss/vite';
+import UnoCSS from 'unocss/vite'
 
-import path from 'path';
-const pathSrc = path.resolve(__dirname, 'src');
+import { viteMockServe } from 'vite-plugin-mock'
 
-export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
-  const env = loadEnv(mode, process.cwd());
+import path from 'path'
+const pathSrc = path.resolve(__dirname, 'src')
+
+export default defineConfig(({ command,mode }: ConfigEnv): UserConfig => {
+  const env = loadEnv(mode, process.cwd())
   return {
     resolve: {
       alias: {
@@ -61,6 +63,16 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
       svgLoader(),
       UnoCSS({
         /* options */
+      }),
+      viteMockServe({
+        mockPath: "mock",
+        localEnabled: command === "serve",
+        prodEnabled: command !== "serve" && true,
+        injectCode: `
+            import { setupProdMockServer } from './mockProdServer';
+            setupProdMockServer();
+          `,
+        logger: false
       }),
       AutoImport({
         // 自动导入 Vue 相关函数，如：ref, reactive, toRef 等
@@ -156,5 +168,5 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
         'vue-i18n'
       ]
     }
-  };
-});
+  }
+})

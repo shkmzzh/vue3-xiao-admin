@@ -17,6 +17,7 @@
     left: 0;
     z-index: 1001;
     overflow: hidden;
+    box-shadow: 0 0 6px -3px var(--el-color-primary);
     .el-menu-item,.el-sub-menu__title {
       height: $muenItemHeight !important;
     }
@@ -236,4 +237,19 @@
     &:hover {
       color: $subMenuHoverText;
     }
+    .svg-icon{
+      font-size: 16px;
+    }
+}
+
+.el-sub-menu {
+  .el-sub-menu__title{
+    .svg-icon{
+      font-size: 16px;
+    }
+    .el-sub-menu__icon-arrow{
+      font-size: 16px;
+
+    }
+  }
 }

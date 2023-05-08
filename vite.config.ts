@@ -46,16 +46,16 @@ export default defineConfig(({ command,mode }: ConfigEnv): UserConfig => {
       open: true,
       // 反向代理解决跨域
       proxy: {
-        [env.VITE_APP_BASE_API]: {
-          // 线上接口API地址
-          target: 'http://vapi.youlai.tech',
-          // 本地接口API地址
-          // target: 'http://localhost:8989',
-          changeOrigin: true,
-          rewrite: path =>
-            // localhost:3000/dev-api/users/me → http://vapi.youlai.tech/users/me
-            path.replace(new RegExp('^' + env.VITE_APP_BASE_API), '')
-        }
+        // [env.VITE_APP_BASE_API]: {
+        //   // 线上接口API地址
+        //   target: 'http://vapi.youlai.tech',
+        //   // 本地接口API地址
+        //   // target: 'http://localhost:8989',
+        //   changeOrigin: true,
+        //   rewrite: path =>
+        //     // localhost:3000/dev-api/users/me → http://vapi.youlai.tech/users/me
+        //     path.replace(new RegExp('^' + env.VITE_APP_BASE_API), '')
+        // }
       }
     },
     plugins: [
@@ -69,7 +69,7 @@ export default defineConfig(({ command,mode }: ConfigEnv): UserConfig => {
         localEnabled: command === "serve",
         prodEnabled: command !== "serve" && true,
         injectCode: `
-            import { setupProdMockServer } from './mockProdServer';
+            import { setupProdMockServer } from './src/mockProdServer';
             setupProdMockServer();
           `,
         logger: false

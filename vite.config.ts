@@ -1,6 +1,6 @@
 import vue from '@vitejs/plugin-vue'
 
-import { UserConfig, ConfigEnv, loadEnv, defineConfig, UserConfigExport } from 'vite'
+import { UserConfig, ConfigEnv, loadEnv, defineConfig } from 'vite'
 
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
@@ -14,7 +14,6 @@ import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 
 import UnoCSS from 'unocss/vite'
 
-import { viteMockServe } from 'vite-plugin-mock'
 
 import path from 'path'
 const pathSrc = path.resolve(__dirname, 'src')
@@ -63,16 +62,6 @@ export default defineConfig(({ command,mode }: ConfigEnv): UserConfig => {
       svgLoader(),
       UnoCSS({
         /* options */
-      }),
-      viteMockServe({
-        mockPath: "mock",
-        localEnabled: command === "serve",
-        prodEnabled: command !== "serve" && true,
-        injectCode: `
-            import { setupProdMockServer } from './src/mockProdServer';
-            setupProdMockServer();
-          `,
-        logger: false
       }),
       AutoImport({
         // 自动导入 Vue 相关函数，如：ref, reactive, toRef 等

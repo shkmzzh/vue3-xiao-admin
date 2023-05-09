@@ -17,6 +17,8 @@ import 'element-plus/theme-chalk/dark/css-vars.css';
 import '@/styles/index.scss';
 import 'uno.css';
 
+import '@/mock/text'
+
 const app = createApp(App);
 // 全局注册 自定义指令(directive)
 setupDirective(app);

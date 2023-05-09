@@ -1,5 +1,4 @@
 // 根据角色动态生成路由
-import { MockMethod } from 'vite-plugin-mock'
 
 const permissionRouter = {
   path: '/demo',
@@ -31,5 +30,5 @@ export default [
       }
     }
   }
-] as MockMethod[]
+]
 

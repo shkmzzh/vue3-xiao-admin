@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { onMounted } from 'vue'
-import { getAsyncRoutes } from '@/api/menu/index'
-onMounted(async () => {
-  const res = await getAsyncRoutes()
-  console.log(res)
-})
+// import { onMounted } from 'vue'
+// import { getAsyncRoutes } from '@/api/menu/index'
+// onMounted(async () => {
+//   const res = await getAsyncRoutes()
+//   console.log(res)
+// })
 </script>
 
 <template>

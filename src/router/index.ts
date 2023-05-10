@@ -1,8 +1,8 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
 
-import pinia from '@/store'
-import { usePermissionStore } from '@/store/modules/permission'
-const store = usePermissionStore(pinia)
+// import pinia from '@/store'
+// import { usePermissionStore } from '@/store/modules/permission'
+// const store = usePermissionStore(pinia)
 export const Layout = () => import('@/layout/index.vue')
 // 静态路由
 export const constantRoutes: RouteRecordRaw[] = [
@@ -102,5 +102,5 @@ export function resetRouter() {
   router.replace({ path: '/login' })
   location.reload()
 }
-store.setRoutes([])
+// store.setRoutes([])
 export default router

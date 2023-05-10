@@ -2,10 +2,11 @@ import { RouteRecordRaw } from 'vue-router'
 import { defineStore } from 'pinia'
 import { constantRoutes } from '@/router'
 // import { listRoutes } from '@/api/menu';
+import { getAsyncRoutes } from '@/api/menu/index'
 
 const modules = import.meta.glob('../../views/**/**.vue')
 const Layout = () => import('@/layout/index.vue')
-// console.log(listRoutes())
+console.log(getAsyncRoutes())
 
 /**
  * Use meta.role to determine if the current user has permission
@@ -77,7 +78,7 @@ const filterAsyncRoutes = (routes: RouteRecordRaw[], roles: string[]) => {
 export const usePermissionStore = defineStore('permission', () => {
   // state
   const routes = ref<RouteRecordRaw[]>([])
-
+  const hasRouter = ref([])
   // actions // 拼接动态路由和静态路由
   function setRoutes(newRoutes: RouteRecordRaw[]) {
     routes.value = constantRoutes.concat(newRoutes)
@@ -89,21 +90,23 @@ export const usePermissionStore = defineStore('permission', () => {
    * @param roles 用户角色集合
    * @returns
    */
-  // function generateRoutes(roles: string[]) {
-  //   return new Promise<RouteRecordRaw[]>((resolve, reject) => {
-  //     // 接口获取所有路由
-  //     listRoutes()
-  //       .then(({ data: asyncRoutes }) => {
-  //         // 根据角色获取有访问权限的路由
-  //         const accessedRoutes = filterAsyncRoutes(asyncRoutes, roles);
-  //         // 得到有权限的路由 ，传入 setRoutes 函数与静态路由进行拼接操作
-  //         setRoutes(accessedRoutes);
-  //         resolve(accessedRoutes);
-  //       })
-  //       .catch(error => {
-  //         reject(error);
-  //       });
-  //   });
-  // }
-  return { routes, setRoutes }
+  function generateRoutes(roles: string[]) {
+    return new Promise<RouteRecordRaw[]>((resolve, reject) => {
+      // 接口获取所有路由
+      getAsyncRoutes()
+        .then(({ data: asyncRoutes }) => {
+          console.log(asyncRoutes)
+          hasRouter.value = asyncRoutes
+          // 根据角色获取有访问权限的路由
+          const accessedRoutes = filterAsyncRoutes(asyncRoutes, roles)
+          // 得到有权限的路由 ，传入 setRoutes 函数与静态路由进行拼接操作
+          setRoutes(accessedRoutes)
+          resolve(accessedRoutes)
+        })
+        .catch(error => {
+          reject(error)
+        })
+    })
+  }
+  return { routes, setRoutes, generateRoutes, hasRouter }
 })

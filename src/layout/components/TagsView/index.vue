@@ -17,7 +17,7 @@ import { translateRouteTitleI18n } from '@/utils/i18n';
 
 import { usePermissionStore } from '@/store/modules/permission';
 import { useTagsViewStore, TagView } from '@/store/modules/tagsView';
-import ScrollPane from './ScrollPane.vue';
+import ScrollPane from '@/layout/components/TagsView/ScrollPane.vue';
 
 const { proxy } = getCurrentInstance() as ComponentInternalInstance;
 const router = useRouter();

@@ -1,6 +1,6 @@
 import Moke from 'mockjs'
 
-Moke.mock("/login","get",{
+Moke.mock("/test","get",{
     code:200,
     message:'操作成功',
     data:[{
@@ -10,15 +10,17 @@ Moke.mock("/login","get",{
           title: '组件封装',
           icon: 'menu',
           hidden: false,
-          roles: [],
-          keepAlive: true
+          roles: ["ROOT"],
+          
         },
+        keepAlive: true,
         children: [
           {
+            path:'kun',
             component: "demo/kun",
-            meta: { title: '厉不厉害你坤哥', icon: '', hidden: false, roles: [], keepAlive: true },
             name:"kun",
-            path:'kun'
+            meta: { title: '厉不厉害你坤哥', icon: '', hidden: false, roles: ['ROOT'], },
+            keepAlive: true
           }
         ]
       }]

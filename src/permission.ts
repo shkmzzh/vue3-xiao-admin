@@ -10,7 +10,7 @@ const permissionStore = usePermissionStore(pinia)
 
 // 白名单路由
 const whiteList = ['/login']
-const hasToken = true
+const hasToken = false
 const roles = ['ROOT']
 router.beforeEach(async (to, from, next) => {
   console.log(to, from)

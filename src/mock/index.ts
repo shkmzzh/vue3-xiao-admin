@@ -9,7 +9,7 @@ Moke.mock("/test","get",{
         meta: {
           title: '组件封装',
           icon: 'menu',
-          hidden: false,
+          hidden: true,
           roles: ["ROOT"],
           
         },

@@ -1,15 +1,11 @@
-<script setup lang="ts">
-// import { onMounted } from 'vue'
-// import { getAsyncRoutes } from '@/api/menu/index'
-// onMounted(async () => {
-//   const res = await getAsyncRoutes()
-//   console.log(res)
-// })
+<script setup lang='ts'>
+import {} from "vue"
+const a =ref('')
 </script>
 
 <template>
-  <div>面板</div>
-  <div>{{ $t('login.login') }}</div>
+<div>dsadasdasdsad</div>
+<el-input v-model="a"></el-input>
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped lang='scss'></style>

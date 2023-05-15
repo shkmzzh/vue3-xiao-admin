@@ -78,9 +78,7 @@ function resolvePath(routePath: string) {
 }
 </script>
 <template>
-   <!-- 不存在 meta属性 或者 item.mate.hidden 的值为 false 的路由 通过 -->
   <div v-if="!item.meta || !item.meta.hidden">
-    <!-- 只包含一个子路由节点的路由，显示其【唯一子路由】  tip: 只有一个子路由 并且 路由中不再包含子路由 -->
     <template
       v-if="
         hasOneShowingChild(item.children, item) &&
@@ -100,7 +98,6 @@ function resolvePath(routePath: string) {
       </app-link>
     </template>
 
-    <!-- 包含多个子路由  -->
     <el-sub-menu v-else :index="resolvePath(item.path)" teleported>
       <template #title>
         <svg-icon
@@ -111,7 +108,6 @@ function resolvePath(routePath: string) {
           translateRouteTitleI18n(item.meta.title)
         }}</span>
       </template>
-      <!-- 找出子路由后，再次调用这个组件渲染子路由 -->
       <sidebar-item
         v-for="child in item.children"
         :key="child.path"

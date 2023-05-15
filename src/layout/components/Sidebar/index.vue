@@ -23,11 +23,6 @@ const route = useRoute();
   <div :class="{ 'has-logo': sidebarLogo }">
     <logo v-if="sidebarLogo" :collapse="!appStore.sidebar.opened" />
     <el-scrollbar>
-      <!-- default-active 页面加载时刻 默认激活菜单的 index 默认激活首页 -->
-      <!-- collapse 是否水平折叠收起菜单 -->
-      <!-- unique-opened 是否只保持一个子菜单的展开 -->
-      <!-- collapse-transition 是否开启折叠动画 -->
-      <!-- mode 菜单展示模式   vertical 垂直 horizontal 水平  -->
       <el-menu
         :default-active="route.path" 
         :collapse="!appStore.sidebar.opened"

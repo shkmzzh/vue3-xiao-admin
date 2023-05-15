@@ -58,7 +58,6 @@ function handleOutsideClick() {
 
 <template>
   <div :class="classObj" class="app-wrapper">
-    <!-- 手机设备侧边栏打开遮罩层 -->
     <div
       v-if="classObj.mobile && classObj.openSidebar"
       class="drawer-bg"
@@ -73,7 +72,6 @@ function handleOutsideClick() {
         <tags-view v-if="showTagsView" />
       </div>
 
-      <!--主页面-->
       <app-main />      
     </div>
   </div>

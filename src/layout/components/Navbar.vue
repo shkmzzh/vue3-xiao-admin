@@ -7,7 +7,18 @@ import { useUserStore } from '@/store/modules/user'
 import { useSettingsStore } from '@/store/modules/settings'
 import RightPanel from '@/components/RightPanel/index.vue'
 import Setting from '@/layout/components/Settings/index.vue'
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
+import { useWindowSize } from '@vueuse/core'
+import { SwitchButton } from '@element-plus/icons-vue'
+
+const { width } = useWindowSize()
+const bol = ref<number>()
+onMounted(() => {
+  window.addEventListener('resize', function handleResize() {
+    width.value = window.innerWidth
+    console.log(width.value)
+  })
+})
 
 const settingsStore = useSettingsStore()
 const showSettings = computed(() => settingsStore.showSettings)
@@ -23,33 +34,42 @@ const { device } = storeToRefs(appStore) // 设备类型：desktop-宽屏设备 
 function toggleSideBar() {
   appStore.toggleSidebar(true)
 }
+
 // 设置面板
 const show = ref(false)
 </script>
 
 <template>
-  <!-- 顶部导航栏 -->
   <div class="navbar">
-    <!-- 左侧面包屑 -->
     <div class="flex">
       <hamburger :is-active="appStore.sidebar.opened" @toggleClick="toggleSideBar" />
       <breadcrumb />
     </div>
-
-    <!-- 右侧导航设置 -->
     <div class="flex">
-      <!-- 导航栏设置(窄屏隐藏)-->
-
       <div v-if="device !== 'mobile'" class="flex items-center">
-        <!--全屏 -->
-        <screenfull class="navbar-setting-item" />
+        <screenfull class="navbar-setting-item  screenfull" />
         <!-- 布局大小 -->
-        <el-tooltip content="布局大小" effect="dark" placement="bottom">
+        <!-- <el-tooltip content="布局大小" effect="dark" placement="bottom">
           <size-select class="navbar-setting-item" />
-        </el-tooltip>
+        </el-tooltip> -->
         <!--语言选择-->
         <lang-select class="navbar-setting-item" />
-        <!-- 设置面板 -->
+        <el-dropdown trigger="click" class="dropdown">
+          <span class="el-dropdown-link navbar-bg-hover select-none">
+            <img src="https://pic3.zhimg.com/80/v2-738a80bf6bfd7adc2a30afc1b3937f34_r.jpg" />
+            <p class="out">admin</p>
+          </span>
+          <template #dropdown>
+            <el-dropdown-menu class="logout">
+              <el-dropdown-item @click="userStore.outLogin">
+                <el-icon>
+                  <SwitchButton />
+                </el-icon>
+                退出系统
+              </el-dropdown-item>
+            </el-dropdown-menu>
+          </template>
+        </el-dropdown>
       </div>
       <div class="setting" @click.stop="show = true">
         <i-ep-setting />
@@ -78,16 +98,44 @@ const show = ref(false)
     display: inline-block;
     cursor: pointer;
     text-align: center;
-    color: #5a5e66;
+    color: #39393a;
 
     &:hover {
-      background: rgba(249, 250, 251, 1);
+      background: rgb(244, 245, 246);
     }
+  }
+  .screenfull{
+    font-size: 17px;
   }
 
   .setting {
     width: 45px;
-    line-height: 53px;
+    line-height: 55px;
+    font-size: 15px;
   }
-}
-</style>
+  .el-dropdown-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 50px;
+    padding: 10px;
+
+    cursor: pointer;
+
+    &:hover {
+      background: rgb(244, 245, 246);
+    }
+
+    p {
+      font-size: 14px;
+      margin-left: 7px;
+      color: #000000d9;
+    }
+
+    img {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+    }
+  }
+}</style>

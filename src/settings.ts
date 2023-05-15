@@ -62,8 +62,8 @@ const defaultSettings: DefaultSettings = {
   theme: 'dark',
   size: 'default', // default |large |small
   language: 'zh-cn', // zh-cn| en
-  themeColor: 1,
-  sideStyle:'fsdfsdfsd'
+  themeColor: 0,
+  sideStyle:'light'
 }
 
 export default defaultSettings

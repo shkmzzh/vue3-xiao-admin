@@ -1,3 +1,4 @@
+
 html.dark {
   --menuBg: #141414 !important;
   --menuText: rgb(254 254 254 / 65.1%) !important;
@@ -9,15 +10,21 @@ html.dark {
   --subMenuHover: #000 !important;
   --sidebarLogo: #141414 !important;
   .navbar {
-    background-color: var(--el-bg-color);
+    background-color: var(--el-bg-color-page);
     color: var(--el-text-color-regular);
-    .navbar-setting-item,.setting{
+    .navbar-setting-item,.setting ,.el-dropdown-link{
       &:hover {
         background: var(--el-fill-color-light);
       }
     }
-    .setting{
+    .setting,.screenfull{
       color: var(--el-text-color-regular);
+    }
+    .dropdown{
+      
+     .out{
+      color: var(--el-text-color-regular);
+     }
     }
   }
 
@@ -33,5 +40,8 @@ html.dark {
     .el-menu-item.is-active .svg-icon {
       fill: #fff;
     }
+  }
+  .login{
+    background-color: #000 !important;
   }
 }

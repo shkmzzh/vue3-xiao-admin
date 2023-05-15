@@ -1,6 +1,7 @@
 import router from '@/router'
 import pinia from '@/store'
 import { usePermissionStore } from '@/store/modules/permission'
+import { useUserStore } from '@/store'
 
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
@@ -8,15 +9,15 @@ NProgress.configure({ showSpinner: false }) // 进度条
 
 const permissionStore = usePermissionStore(pinia)
 
+const  userStore = useUserStore()
 // 白名单路由
 const whiteList = ['/login']
-const hasToken = false
 const roles = ['ROOT']
 router.beforeEach(async (to, from, next) => {
   console.log(to, from)
 
   NProgress.start()
-  if (hasToken) {
+  if (userStore.token) {
     if (to.path === '/login') {
       // 如果已登录，跳转首页
       next({ path: '/' })

@@ -10,7 +10,6 @@ const settingsStore = useSettingsStore()
 const isDark = useDark()
 const toggleDark = () => {
   useToggle(isDark)
-  console.log(isDark.value, 'fdsfsdfsdfd')
   if (isDark.value) {
     document.documentElement.classList.remove('light')
   } else if (settingsStore.sideStyle == 'light') {

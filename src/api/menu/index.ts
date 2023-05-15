@@ -1,7 +1,7 @@
-import request from '@/utils/request'
+import mockservice from '@/utils/mockservice'
 
 export const getAsyncRoutes = () => {
-  return request({
+  return mockservice({
     method: 'get',
     url: '/test'
   })

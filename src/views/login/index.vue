@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import LoginForm from '@/views/login/loginform.vue'
-import RegisterForm from '@/views/login/registerform.vue'
+import LoginForm from './components/loginform.vue'
+import RegisterForm from './components/registerform.vue'
+import RightSet from './components/rightset.vue'
 const isForm = ref(true)
 function changeForm(val: boolean) {
   isForm.value = val
@@ -10,6 +11,9 @@ function changeForm(val: boolean) {
 
 <template>
   <div class="login">
+    <div class="right-setting">
+      <RightSet></RightSet>
+    </div>
     <div class="contain-login">
       <div class="left-area"></div>
       <div class="right-area">
@@ -31,9 +35,14 @@ function changeForm(val: boolean) {
   height: 100%;
   background-color: #fff;
 }
+.right-setting{
+  position: fixed;
+  top: 10px;
+  right: 25px;
+}
 .contain-login {
-  height: 100%;
-  background: url('@/assets/icons/login-bg.svg') no-repeat 100% 100%;
+  height: 100vh;
+  background: url('@/assets/icons/login-bg.svg') no-repeat bottom scroll;
   display: flex;
   justify-content: space-between;
 }
@@ -82,13 +91,13 @@ function changeForm(val: boolean) {
 }
 @media (max-width: 1750px) {
   .right-area {
-    margin: 15% 11% 0 0;
+    margin: 6rem 11% 0 0;
     transition: all 300ms;
   }
 }
 @media (max-width: 1400px) {
   .right-area {
-    margin: 22% 10% 0 0;
+    margin: 6rem 10% 0 0;
     transition: all 300ms;
   }
 }
@@ -98,7 +107,7 @@ function changeForm(val: boolean) {
     transition: all 300ms;
   }
   .right-area {
-    margin: 20% auto;
+    margin: 8.5rem auto;
     transition: all 300ms;
   }
 }

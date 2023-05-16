@@ -1,7 +1,7 @@
 export function lighten(color: string, amount: number): string {
   const rgb = parseColor(color);
   const hsl = rgbToHsl(rgb.r, rgb.g, rgb.b);
-  hsl[2] += amount / 1;
+  hsl[2] += amount / 100;
   const newRgb = hslToRgb(hsl[0], hsl[1], hsl[2]);
   return rgbToString(newRgb.r, newRgb.g, newRgb.b);
 }
@@ -9,7 +9,7 @@ export function lighten(color: string, amount: number): string {
 export function darken(color: string, amount: number): string {
   const rgb = parseColor(color);
   const hsl = rgbToHsl(rgb.r, rgb.g, rgb.b);
-  hsl[2] -= amount / 1;
+  hsl[2] -= amount / 100;
   const newRgb = hslToRgb(hsl[0], hsl[1], hsl[2]);
   return rgbToString(newRgb.r, newRgb.g, newRgb.b);
 }

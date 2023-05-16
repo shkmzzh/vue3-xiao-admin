@@ -3,6 +3,7 @@ import { useSettingsStore } from '@/store/modules/settings'
 import sunnyIcon from '@/assets/icons/sunny.svg'
 import moonIcon from '@/assets/icons/moon.svg'
 import { themeColorList, MenuObject } from '@/layout/components/theme'
+import { lighten, darken } from '@/utils/color-convert'
 /**
  * 暗黑模式
  */
@@ -57,6 +58,31 @@ const activeColor = ref<number>(0)
 /**
  * 切换主题颜色
  */
+
+ /** 设置 `element-plus` 主题色 */
+function setPropertyPrimary(mode: string, i: number, color: string) {
+  document.documentElement.style.setProperty(
+    `--el-color-primary-${mode}-${i}`,
+    isDark.value ? darken(color, (i / 10) * 50) : lighten(color, (i / 10) * 36)
+  )
+}
+/** 切换亮暗模式 ,改变 `element-plus` 主题色 */
+watch(
+  isDark,
+  (newVal, oldVal) => {
+    for (let i = 1; i <= 2; i++) {
+      setPropertyPrimary( 'dark', i, themeColorList.value[Number(settingsStore.themeColor)].themeColor)
+    }
+    for (let i = 1; i <= 9; i++) {
+      setPropertyPrimary('light', i, themeColorList.value[Number(settingsStore.themeColor)].themeColor)
+    }
+  },
+  {
+    immediate: true
+  }
+)
+
+/** 设置 系统主题色 */
 function changeThemeColor(color: MenuObject, index: number) {
   MenuObjectSaveKey.forEach(key => document.documentElement.style.removeProperty(key))
   const styleList: MenuObjectUse[] = []
@@ -70,6 +96,12 @@ function changeThemeColor(color: MenuObject, index: number) {
   }
   styleList.forEach(item => document.documentElement.style.setProperty(item.key, item.value))
   document.documentElement.style.setProperty('--el-color-primary', color.themeColor)
+  for (let i = 1; i <= 2; i++) {
+    setPropertyPrimary('dark', i, color.themeColor)
+  }
+  for (let i = 1; i <= 9; i++) {
+    setPropertyPrimary('light', i, color.themeColor)
+  }
   settingsStore.changeSetting({ key: 'themeColor', value: index })
   activeColor.value = index
 }

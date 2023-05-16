@@ -17,12 +17,12 @@ export interface MenuObject extends Object {
 
 export const themeColorList = ref<MenuObject[]>([
   {
-    themeColor:'#4091f7', // 默认主题色
+    themeColor:'#409EFF', // 默认主题色
 
     menuBg: "#001529", 
     menuText: "rgb(254 254 254 / 65%)",
     subMenuBg: "#0f0303", 
-    subMenuActiveBg: "#4091f7", 
+    subMenuActiveBg: "#409EFF", 
     subMenuActiveText: "#fff",
     subMenuHoverText:'#fff',
     sidebarLogo: "#002140", 
@@ -46,12 +46,12 @@ export const themeColorList = ref<MenuObject[]>([
     subActiveText:"#fff"
   },
   {
-    themeColor:'#693ac9', // 紫色
+    themeColor:'#722ed1', // 紫色
 
     menuBg: "#130824", 
     menuText: "#7a80b4",
     subMenuBg: "#000", 
-    subMenuActiveBg: "#693ac9", 
+    subMenuActiveBg: "#722ed1", 
     subMenuActiveText: "#fff",
     subMenuHoverText:'#fff',
     sidebarLogo: "#1f0c38", 

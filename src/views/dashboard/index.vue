@@ -1,11 +1,9 @@
 <script setup lang='ts'>
-import {} from "vue"
-const a =ref('')
 </script>
 
 <template>
 <div>dsadasdasdsad</div>
-<el-input v-model="a"></el-input>
+<el-button type="primary">dsadasdasdsadsadasd</el-button>
 </template>
 
 <style scoped lang='scss'></style>

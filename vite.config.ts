@@ -11,8 +11,7 @@ import IconsResolver from 'unplugin-icons/resolver'
 import svgLoader from 'vite-svg-loader'
 
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
-
-import UnoCSS from 'unocss/vite'
+import WindiCSS from 'vite-plugin-windicss'
 
 
 import path from 'path'
@@ -56,10 +55,8 @@ export default defineConfig(({ command,mode }: ConfigEnv): UserConfig => {
     },
     plugins: [
       vue(),
+      WindiCSS(),
       svgLoader(),
-      UnoCSS({
-        /* options */
-      }),
       AutoImport({
         // 自动导入 Vue 相关函数，如：ref, reactive, toRef 等
         imports: ['vue', '@vueuse/core'],

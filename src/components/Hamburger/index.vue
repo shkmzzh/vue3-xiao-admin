@@ -38,8 +38,11 @@ function toggleClick() {
   width: 20px;
   height: 20px;
   vertical-align: -4px;
+  display: inline;
   &.is-active {
     transform: rotate(180deg);
   }
+  
+    
 }
 </style>

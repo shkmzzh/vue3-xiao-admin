@@ -41,11 +41,11 @@ const show = ref(false)
 
 <template>
   <div class="navbar">
-    <div class="flex">
+    <div class="flex items-center">
       <hamburger :is-active="appStore.sidebar.opened" @toggleClick="toggleSideBar" />
       <breadcrumb />
     </div>
-    <div class="flex">
+    <div class="flex items-center">
       <div v-if="device !== 'mobile'" class="flex items-center">
         <screenfull class="navbar-setting-item  screenfull" />
         <!-- 布局大小 -->
@@ -110,7 +110,7 @@ const show = ref(false)
 
   .setting {
     width: 45px;
-    line-height: 55px;
+    line-height: 60px;
     font-size: 15px;
   }
   .el-dropdown-link {
@@ -137,5 +137,9 @@ const show = ref(false)
       height: 22px;
       border-radius: 50%;
     }
+  }
+  svg,img{
+    display: inline;
+    vertical-align: inherit;
   }
 }</style>

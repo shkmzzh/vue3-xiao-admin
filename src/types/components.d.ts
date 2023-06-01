@@ -32,6 +32,7 @@ declare module '@vue/runtime-core' {
     Hamburger: typeof import('./../components/Hamburger/index.vue')['default']
     IconSelect: typeof import('./../components/IconSelect/index.vue')['default']
     IEpClose: typeof import('~icons/ep/close')['default']
+    IEpCloseBold: typeof import('~icons/ep/close-bold')['default']
     IEpSetting: typeof import('~icons/ep/setting')['default']
     LangSelect: typeof import('./../components/LangSelect/index.vue')['default']
     Pagination: typeof import('./../components/Pagination/index.vue')['default']

@@ -2,7 +2,6 @@
 </script>
 
 <template>
-<div>dsadasdasdsad</div>
 <el-button type="primary">dsadasdasdsadsadasd</el-button>
 </template>
 

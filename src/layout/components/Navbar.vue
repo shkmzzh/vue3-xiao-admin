@@ -138,8 +138,4 @@ const show = ref(false)
       border-radius: 50%;
     }
   }
-  svg,img{
-    display: inline;
-    vertical-align: inherit;
-  }
 }</style>

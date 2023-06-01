@@ -15,8 +15,7 @@ import i18n from '@/lang/index';
 // 样式
 import 'element-plus/theme-chalk/dark/css-vars.css';
 import '@/styles/index.scss';
-import 'virtual:windi.css'
-
+import 'uno.css';
 import '@/mock'
 
 const app = createApp(App);

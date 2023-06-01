@@ -238,7 +238,7 @@ onMounted(() => {
         @contextmenu.prevent="openTagMenu(tag, $event)"
       >
         {{ translateRouteTitleI18n(tag.meta?.title) }}
-        <span v-show="!isAffix(tag) && isActive(tag)" class="tags-item-close" @click.prevent.stop="closeSelectedTag(tag)">
+        <span v-if="!isAffix(tag)" class="tags-item-close show-close" @click.prevent.stop="closeSelectedTag(tag)">
           <i-ep-closeBold />
         </span>
       </router-link>
@@ -323,9 +323,7 @@ onMounted(() => {
     }
 
     &.active {
-      // background-color: var(--el-color-primary);
       color: var(--el-color-primary);
-      // border-color: var(--el-color-primary);
       position: relative;
       &::before {
         content: '';
@@ -338,22 +336,39 @@ onMounted(() => {
       }
       .tags-item-close {
         display: inline;
+        color: var(--el-color-primary);
         svg {
           vertical-align: text-bottom;
           font-size: 10px;
           margin-left: 1px;
-        }
-        &:hover {
-          background: rgb(0 0 0 / 0.16);
+          &:hover {
+            border-radius: 500%;
+            background: rgb(0 0 0 / 0.16);
+          }
         }
       }
     }
 
     &-close {
-      border-radius: 100%;
-      &:hover {
-        color: #fff;
-        background: rgb(0 0 0 / 0.16);
+      color: var(--el-color-primary);
+      svg {
+        vertical-align: text-bottom;
+        font-size: 10px;
+        margin-left: 1px;
+        &:hover {
+          border-radius: 500%;
+          color: #fff;
+          background: rgb(0 0 0 / 0.22);
+        }
+      }
+    }
+    .show-close {
+      display: none;
+      transition: all 0.6s cubic-bezier(0.645, 0.045, 0.355, 1);
+    }
+    &:hover {
+      .show-close {
+        display: inline-block;
       }
     }
   }

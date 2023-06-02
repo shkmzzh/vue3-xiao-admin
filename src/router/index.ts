@@ -33,8 +33,8 @@ export const constantRoutes: RouteRecordRaw[] = [
         meta: { title: '首页', icon: 'awl', affix: true }
       },
       {
-        path: '401',
-        component: () => import('@/views/error-page/401.vue'),
+        path: '403',
+        component: () => import('@/views/error-page/403.vue'),
         meta: { hidden: true }
       },
       {
@@ -74,10 +74,10 @@ export const constantRoutes: RouteRecordRaw[] = [
         meta: { title: '404' }
       },
       {
-        component: () => import('@/views/error-page/401.vue'),
-        path: '401',
-        name: '401',
-        meta: { title: '401' }
+        component: () => import('@/views/error-page/403.vue'),
+        path: '403',
+        name: '403',
+        meta: { title: '403' }
       }
     ]
   }

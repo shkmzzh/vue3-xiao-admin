@@ -35,7 +35,7 @@ onMounted(() => {
     <svg xmlns="http://www.w3.org/2000/svg" id="robot-error" viewBox="0 0 260 118.9" role="img">
       <defs>
         <clipPath id="white-clip"><circle id="white-eye" fill="#cacaca" cx="130" cy="65" r="20" /></clipPath>
-        <text id="text-s" class="error-text" y="106">404</text>
+        <text id="text-s" class="error-text" y="106">403</text>
       </defs>
       <path class="alarm" fill="#e62326" d="M120.9 19.6V9.1c0-5 4.1-9.1 9.1-9.1h0c5 0 9.1 4.1 9.1 9.1v10.6" />
       <use xlink:href="#text-s" x="-0.5px" y="-1px" fill="var(--el-color-primary)"></use>
@@ -52,7 +52,7 @@ onMounted(() => {
         <use xlink:href="#tornillo" y="60"></use>
       </g>
     </svg>
-    <h1>Sorry, the page you visited does not exist</h1>
+    <h1>Sorry, you do not have access to this page</h1>
     <h2>Go <a target="_blank" href="/home">Home!</a></h2>
   </div>
 </template>

@@ -294,6 +294,7 @@ onMounted(() => {
     font-size: 12px;
     transition: all 0.4s;
     position: relative;
+    
     &:first-of-type {
       margin-left: 15px;
     }

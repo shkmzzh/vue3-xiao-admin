@@ -30,7 +30,7 @@ export const constantRoutes: RouteRecordRaw[] = [
         path: 'dashboard',
         component: () => import('@/views/dashboard/index.vue'),
         name: 'dashboard',
-        meta: { title: '首页', icon: 'awl', affix: true }
+        meta: { title: '首页', icon: 'home', affix: true }
       },
       {
         path: '403',
@@ -45,25 +45,13 @@ export const constantRoutes: RouteRecordRaw[] = [
     ]
   },
   {
-    path: '/test',
-    component: Layout,
-    children: [
-      {
-        component: () => import('@/views/test/index.vue'),
-        name: 'Test',
-        path: '',
-        meta: { title: 'test', icon: 'link' }
-      }
-    ]
-  },
-  {
     path: '/error',
     component: Layout,
     redirect: '/error/404',
     name: 'error',
     meta: {
       title: '错误页面',
-      icon: 'api',
+      icon: 'error',
       hidden: false
     },
     children: [

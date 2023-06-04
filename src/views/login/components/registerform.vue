@@ -64,6 +64,21 @@ const emit = defineEmits<{
 function toLogin() {
   emit('changeForm', true)
 }
+
+// Enter 键提交表单
+function onkeypress({ code }: KeyboardEvent) {
+  if (code === "Enter") {
+    submitForm(ruleFormRef.value);
+  }
+}
+
+onMounted(() => {
+  window.document.addEventListener("keypress", onkeypress);
+});
+
+onBeforeUnmount(() => {
+  window.document.removeEventListener("keypress", onkeypress);
+});
 </script>
 
 <template>

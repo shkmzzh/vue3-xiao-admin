@@ -4,7 +4,7 @@ import {} from "vue"
 </script>
 
 <template>
-<div>dsadasdasd</div>
+<div>测试demo</div>
 </template>
 
 <style scoped lang='scss'></style>

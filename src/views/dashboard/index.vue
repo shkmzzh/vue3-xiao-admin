@@ -1,8 +1,7 @@
-<script setup lang='ts'>
-</script>
+<script setup lang="ts"></script>
 
 <template>
-<el-button type="primary">dsadasdasdsadsadasd</el-button>
+  <h1>welcome</h1>
 </template>
 
-<style scoped lang='scss'></style>
+<style scoped lang="scss"></style>

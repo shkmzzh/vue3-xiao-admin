@@ -6,8 +6,8 @@ export const useUserStore = defineStore('user', () => {
   const token = useStorage<string>('token','')
   async function setLogin(val:object){
   const res = await getLogin(val)
-  token.value =res.token
-  console.log(token.value);
+  
+  token.value =res.data.token
   }
  function outLogin(){
     token.value = ''

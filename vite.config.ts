@@ -11,12 +11,12 @@ import IconsResolver from 'unplugin-icons/resolver'
 import svgLoader from 'vite-svg-loader'
 
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
-import UnoCSS from "unocss/vite";
+import UnoCSS from 'unocss/vite'
 
 import path from 'path'
 const pathSrc = path.resolve(__dirname, 'src')
 
-export default defineConfig(({ command,mode }: ConfigEnv): UserConfig => {
+export default defineConfig(({ command, mode }: ConfigEnv): UserConfig => {
   const env = loadEnv(mode, process.cwd())
   return {
     resolve: {
@@ -47,11 +47,11 @@ export default defineConfig(({ command,mode }: ConfigEnv): UserConfig => {
           // 线上接口API地址
           target: 'http://www.kangliuyong.com:10002/',
           changeOrigin: true,
-          rewrite: path =>
-            path.replace(new RegExp('^' + env.VITE_APP_BASE_API), '')
-        },
-      },
+          rewrite: path => path.replace(new RegExp('^' + env.VITE_APP_BASE_API), '')
+        }
+      }
     },
+
     plugins: [
       vue(),
       UnoCSS(),
@@ -98,6 +98,20 @@ export default defineConfig(({ command,mode }: ConfigEnv): UserConfig => {
         symbolId: 'icon-[dir]-[name]'
       })
     ],
+    build: {
+      outDir: 'dist', // 打包后的文件输出目录
+      assetsDir: 'static', // 存放静态资源的目录
+      rollupOptions: {
+        input: {
+          index: 'index.html' // 打包入口文件路径
+        },
+        output: {
+          chunkFileNames: 'static/js/[name]-[hash].js', // Chunk 文件名格式
+          entryFileNames: 'static/js/[name]-[hash].js', // 入口文件名格式
+          assetFileNames: 'static/[ext]/[name]-[hash].[ext]' // 资源文件名格式
+        }
+      }
+    },
     optimizeDeps: {
       include: [
         'vue',

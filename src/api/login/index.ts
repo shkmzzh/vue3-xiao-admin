@@ -1,15 +1,16 @@
-import request from '@/utils/request'
-export function getLogin(data:object){
-    return request({
-        method:'post',
-        url:'/login',
-        data
-    })
+import mockservice from '@/utils/mockservice'
+
+export const getLogin = (data: object) => {
+  return mockservice({
+    method: 'post',
+    url: '/login',
+    data
+  })
 }
-export function getRegister(data:object){
-    return request({
-        method:'post',
-        url:'/register',
-        data
-    })
+export const getRegister = (data: object) => {
+  return mockservice({
+    method: 'post',
+    url: '/register',
+    data
+  })
 }

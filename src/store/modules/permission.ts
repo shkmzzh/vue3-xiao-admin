@@ -1,12 +1,10 @@
 import { RouteRecordRaw } from 'vue-router'
 import { defineStore } from 'pinia'
 import { constantRoutes } from '@/router'
-// import { listRoutes } from '@/api/menu';
 import { getAsyncRoutes } from '@/api/menu/index'
 
 const modules = import.meta.glob('../../views/**/**.vue')
 const Layout = () => import('@/layout/index.vue')
-console.log(getAsyncRoutes())
 
 /**
  * Use meta.role to determine if the current user has permission
@@ -49,7 +47,6 @@ const filterAsyncRoutes = (routes: RouteRecordRaw[], roles: string[]) => {
       if (tmpRoute.component?.toString() == 'Layout') {
         // 将 后台 传过来的 'layout' 字符 替换成 Layout 组件
         tmpRoute.component = Layout
-        console.log()
       } else {
         // 如果后台 传过来的不是 'Layout' , 则 将传过来的来的 字符 作为组件名 注册到component上
         const component = modules[`../../views/${tmpRoute.component}.vue`]

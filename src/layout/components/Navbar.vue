@@ -16,7 +16,6 @@ const bol = ref<number>()
 onMounted(() => {
   window.addEventListener('resize', function handleResize() {
     width.value = window.innerWidth
-    console.log(width.value)
   })
 })
 

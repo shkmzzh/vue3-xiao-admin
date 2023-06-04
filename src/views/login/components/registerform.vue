@@ -1,27 +1,21 @@
 <script setup lang="ts">
-import { } from 'vue'
-import { UserFilled, Lock, PhoneFilled } from '@element-plus/icons-vue'
-import { FormRules, FormInstance} from 'element-plus'
-import { getRegister } from '@/api/login/index'
-
+import { User, Lock } from '@element-plus/icons-vue'
+import { FormRules, FormInstance } from 'element-plus'
+import { getRegister } from '@/api/login'
 const ruleForm = ref({
-  appkey: 'U2FsdGVkX19WSQ59Cg+Fj9jNZPxRC5y0xB1iV06BeNA=',
-  nickName: '',
-  phone: '',
+  username: '',
   password: '',
   checkPass: ''
 })
 
 // 密码二次校验
 
-const REGEXP_PWD =
-  /^(?![0-9]+$)(?![a-z]+$)(?![A-Z]+$)(?!([^(0-9a-zA-Z)]|[()])+$)(?!^.*[\u4E00-\u9FA5].*$)([^(0-9a-zA-Z)]|[()]|[a-z]|[A-Z]|[0-9]){8,18}$/
+const REGEXP_PWD = /^(?![0-9]+$)(?![a-z]+$)(?![A-Z]+$)(?!([^(0-9a-zA-Z)]|[()])+$)(?!^.*[\u4E00-\u9FA5].*$)([^(0-9a-zA-Z)]|[()]|[a-z]|[A-Z]|[0-9]){8,18}$/
 
 const rules = ref<FormRules>({
-  nickName: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
-  phone: [
-    { required: true, message: '请输入手机号', trigger: 'blur' },
-    { pattern: /^((\(\d{2,3}\))|(\d{3}\-))?1[3|5|8]\d{9}$/, message: '手机号格式错误', trigger: 'blur' }
+  username: [
+    { required: true, message: '请输入用户名', trigger: 'blur' },
+    { pattern: /^[a-zA-Z0-9_]{2,10}$/, message: '用户名应为2-10个字符', trigger: 'blur' }
   ],
   password: [
     { required: true, message: '请输入密码', trigger: 'blur' },
@@ -47,7 +41,6 @@ const ruleFormRef = ref<FormInstance>()
 const submitForm = async (formEl: FormInstance | undefined) => {
   if (!formEl) return
   await formEl.validate(async (valid, fields) => {
-    console.log(ruleFormRef.value)
     if (valid) {
       const { checkPass, ...newObj } = ruleForm.value
       await getRegister(newObj)
@@ -67,39 +60,34 @@ function toLogin() {
 
 // Enter 键提交表单
 function onkeypress({ code }: KeyboardEvent) {
-  if (code === "Enter") {
-    submitForm(ruleFormRef.value);
+  if (code === 'Enter') {
+    submitForm(ruleFormRef.value)
   }
 }
 
 onMounted(() => {
-  window.document.addEventListener("keypress", onkeypress);
-});
+  window.document.addEventListener('keypress', onkeypress)
+})
 
 onBeforeUnmount(() => {
-  window.document.removeEventListener("keypress", onkeypress);
-});
+  window.document.removeEventListener('keypress', onkeypress)
+})
 </script>
 
 <template>
   <div class="register-form">
     <el-form ref="ruleFormRef" :model="ruleForm" :rules="rules">
-      <el-form-item prop="nickName">
-        <el-input :prefix-icon="UserFilled" placeholder="用户名" clearable v-model="ruleForm.nickName"></el-input>
-      </el-form-item>
-      <el-form-item prop="phone">
-        <el-input :prefix-icon="PhoneFilled" placeholder="手机号" clearable v-model="ruleForm.phone"></el-input>
+      <el-form-item prop="username">
+        <el-input :prefix-icon="User" placeholder="用户名" clearable v-model="ruleForm.username"></el-input>
       </el-form-item>
       <el-form-item prop="password">
-        <el-input :prefix-icon="Lock" placeholder="密码" clearable type="password" show-password
-          v-model="ruleForm.password"></el-input>
+        <el-input :prefix-icon="Lock" placeholder="密码" clearable type="password" show-password v-model="ruleForm.password"></el-input>
       </el-form-item>
       <el-form-item prop="checkPass">
-        <el-input :prefix-icon="Lock" placeholder="确认密码" clearable type="password" show-password
-          v-model="ruleForm.checkPass"></el-input>
+        <el-input :prefix-icon="Lock" placeholder="确认密码" clearable type="password" show-password v-model="ruleForm.checkPass"></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="submitForm(ruleFormRef)" >注册</el-button>
+        <el-button type="primary" @click="submitForm(ruleFormRef)">注册</el-button>
       </el-form-item>
     </el-form>
     <div class="sub-link">
@@ -116,7 +104,7 @@ onBeforeUnmount(() => {
   width: 100%;
   padding: 0 5%;
   overflow: hidden;
-  margin-top: 20px;
+  margin-top: 40px;
 
   .el-form {
     .el-form-item {

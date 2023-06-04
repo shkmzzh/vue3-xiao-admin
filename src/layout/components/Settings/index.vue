@@ -91,7 +91,6 @@ function changeThemeColor(color: MenuObject, index: number) {
         key: MenuObjectSaveKey.get(key) as '', //menubg
         value: value // #xxx
       })
-    console.log(styleList)
   }
   styleList.forEach(item => document.documentElement.style.setProperty(item.key, item.value))
   document.documentElement.style.setProperty('--el-color-primary', color.themeColor)

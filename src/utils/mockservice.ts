@@ -10,24 +10,30 @@ const mockservice = axios.create({
 // 请求拦截器
 mockservice.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
-   
-    return config;
+    return config
   },
   (error: any) => {
-    return Promise.reject(error);
+    return Promise.reject(error)
   }
-);
+)
 
 // 响应拦截器
 mockservice.interceptors.response.use(
   (response: AxiosResponse) => {
-   
-      return response.data;
+    if (response.data && response.data.code == 201) {
+      ElMessage({
+        message: response.data.message,
+        type: 'error'
+      })
+      return Promise.reject(new Error(response.data.msg))
+    }
+    ElMessage.success(response.data.message)
+    return response.data
   },
   (error: any) => {
-    return Promise.reject(error.message);
+    return Promise.reject(error.message)
   }
-);
+)
 
 // 导出 axios 实例
-export default mockservice;
+export default mockservice

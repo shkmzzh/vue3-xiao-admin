@@ -14,7 +14,6 @@ const  userStore = useUserStore()
 const whiteList = ['/login']
 const roles = ['ROOT']
 router.beforeEach(async (to, from, next) => {
-  console.log(to, from)
 
   NProgress.start()
   if (userStore.token) {

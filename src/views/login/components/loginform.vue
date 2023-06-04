@@ -1,23 +1,22 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { PhoneFilled, Lock } from '@element-plus/icons-vue'
+import { User, Lock } from '@element-plus/icons-vue'
 import type { FormRules, FormInstance } from 'element-plus'
 import { useUserStore } from '@/store/modules/user'
 import { useRouter } from 'vue-router'
 const router = useRouter()
 const userStore = useUserStore()
 const ruleForm = ref({
-  appkey: 'U2FsdGVkX19WSQ59Cg+Fj9jNZPxRC5y0xB1iV06BeNA=',
-  phone: '',
+  username: '',
   password: ''
 })
 
 const REGEXP_PWD = /^(?![0-9]+$)(?![a-z]+$)(?![A-Z]+$)(?!([^(0-9a-zA-Z)]|[()])+$)(?!^.*[\u4E00-\u9FA5].*$)([^(0-9a-zA-Z)]|[()]|[a-z]|[A-Z]|[0-9]){8,18}$/
 
 const rules = ref<FormRules>({
-  phone: [
-    { required: true, message: '请输入手机号', trigger: 'blur' },
-    { pattern: /^((\(\d{2,3}\))|(\d{3}\-))?1[3|5|8]\d{9}$/, message: '手机号格式错误', trigger: 'blur' }
+  username: [
+    { required: true, message: '用户名', trigger: 'blur' },
+    { pattern: /^[a-zA-Z0-9_]{2,10}$/, message: '用户名应为2-10个字符', trigger: 'blur' }
   ],
   password: [
     { required: true, message: '请输入密码', trigger: 'blur' },
@@ -32,11 +31,9 @@ const submitForm = async (formEl: FormInstance | undefined) => {
   if (!formEl) return
   await formEl.validate((valid, fields) => {
     if (valid) {
-      console.log(ruleForm.value)
       userStore.setLogin(ruleForm.value).then(() => {
         router.push({ path: '/' })
       })
-      debugger
     } else {
       console.log('error submit!', fields)
     }
@@ -69,8 +66,8 @@ onBeforeUnmount(() => {
 <template>
   <div class="login-form">
     <el-form ref="ruleFormRef" :model="ruleForm" :rules="rules">
-      <el-form-item prop="phone">
-        <el-input :prefix-icon="PhoneFilled" placeholder="手机号" clearable v-model="ruleForm.phone"></el-input>
+      <el-form-item prop="username">
+        <el-input :prefix-icon="User" placeholder="用户名" clearable v-model="ruleForm.username"></el-input>
       </el-form-item>
       <el-form-item prop="password">
         <el-input :prefix-icon="Lock" placeholder="密码" clearable type="password" show-password v-model="ruleForm.password"></el-input>

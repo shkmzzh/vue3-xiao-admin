@@ -220,9 +220,9 @@ function handleScroll() {
 
 onMounted(() => {
   console.log(visitedViews)
-
   initTags()
 })
+
 </script>
 
 <template>
@@ -244,7 +244,6 @@ onMounted(() => {
       </router-link>
     </scroll-pane>
 
-    <!-- tag标签操作菜单 -->
     <ul v-show="tagMenuVisible" class="tag-menu" :style="{ left: left + 'px', top: top + 'px' }">
       <li @click="refreshSelectedTag(selectedTag)">
         <svg-icon icon-class="refresh" />
@@ -276,7 +275,7 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 .tags-container {
-  height: 38px;
+  height: 34px;
   width: 100%;
   border-top: 1px solid var(--el-border-color-light);
   border-bottom: 1px solid var(--el-border-color-light);
@@ -284,13 +283,13 @@ onMounted(() => {
   background-color: var(--el-bg-color);
   .tags-item {
     display: inline-block;
-    height: 28px;
-    line-height: 28px;
+    height: 27px;
+    line-height: 27px;
     border-radius: 3px 3px 0 0;
     cursor: pointer;
     box-shadow: 0 0 1px #888;
     padding: 0px 10px;
-    margin: 4px 5px 0 0;
+    margin: 3px 5px 0 0;
     font-size: 12px;
     transition: all 0.4s;
     position: relative;

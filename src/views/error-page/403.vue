@@ -53,7 +53,7 @@ onMounted(() => {
       </g>
     </svg>
     <h1>Sorry, you do not have access to this page</h1>
-    <h2>Go <a target="_blank" href="/home">Home!</a></h2>
+    <h2>Go <a target="_blank" href="/">Home!</a></h2>
   </div>
 </template>
 

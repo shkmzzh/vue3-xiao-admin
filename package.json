@@ -24,7 +24,7 @@
     "screenfull": "^6.0.0",
     "unocss": "^0.52.7",
     "vite-svg-loader": "^4.0.0",
-    "vue": "^3.2.45",
+    "vue": "^3.3.4",
     "vue-i18n": "9",
     "vue-router": "^4.1.6"
   },

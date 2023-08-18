@@ -1,32 +1,42 @@
 <script setup lang="ts">
+import { onMounted, onUnmounted, ref } from 'vue'
+
 const root = document.documentElement
 const eyef = ref<SVGElement | null>(null)
 let cx = 0
 let cy = 0
 
+const mousemoveHandler = (evt: MouseEvent) => {
+  let x = evt.clientX / innerWidth
+  let y = evt.clientY / innerHeight
+
+  root.style.setProperty('--mouse-x', x.toString())
+  root.style.setProperty('--mouse-y', y.toString())
+
+  cx = 115 + 30 * x
+  cy = 50 + 30 * y
+  if (eyef.value) {
+    eyef.value.setAttribute('cx', cx.toString())
+    eyef.value.setAttribute('cy', cy.toString())
+  }
+}
+
+const touchmoveHandler = (touchHandler: TouchEvent) => {
+  let x = touchHandler.touches[0].clientX / innerWidth
+  let y = touchHandler.touches[0].clientY / innerHeight
+
+  root.style.setProperty('--mouse-x', x.toString())
+  root.style.setProperty('--mouse-y', y.toString())
+}
+
 onMounted(() => {
-  document.addEventListener('mousemove', evt => {
-    let x = evt.clientX / innerWidth
-    let y = evt.clientY / innerHeight
+  document.addEventListener('mousemove', mousemoveHandler)
+  document.addEventListener('touchmove', touchmoveHandler)
+})
 
-    root.style.setProperty('--mouse-x', x.toString())
-    root.style.setProperty('--mouse-y', y.toString())
-
-    cx = 115 + 30 * x
-    cy = 50 + 30 * y
-    if (eyef.value) {
-      eyef.value.setAttribute('cx', cx.toString())
-      eyef.value.setAttribute('cy', cy.toString())
-    }
-  })
-
-  document.addEventListener('touchmove', touchHandler => {
-    let x = touchHandler.touches[0].clientX / innerWidth
-    let y = touchHandler.touches[0].clientY / innerHeight
-
-    root.style.setProperty('--mouse-x', x.toString())
-    root.style.setProperty('--mouse-y', y.toString())
-  })
+onUnmounted(() => {
+  document.removeEventListener('mousemove', mousemoveHandler)
+  document.removeEventListener('touchmove', touchmoveHandler)
 })
 </script>
 

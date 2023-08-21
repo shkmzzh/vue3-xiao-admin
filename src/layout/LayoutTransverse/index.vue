@@ -2,7 +2,7 @@
 import { computed, watchEffect } from 'vue';
 import { useWindowSize } from '@vueuse/core';
 import { AppMain, Navbar, Settings, TagsView } from '@/layout/components/index';
-import Sidebar from '@/layout/components/Sidebar/index.vue';
+import Sidebar from './components/Sidebar.vue';
 
 import { useAppStore,useSettingsStore } from '@/store';
 
@@ -57,9 +57,15 @@ function handleOutsideClick() {
 
 <template>
   <div class="layout-transverse">
-    <Settings></Settings>
-    <Sidebar></Sidebar>
+    <Navbar>
+      <template #layout>
+        <Sidebar></Sidebar>
+      </template>
+     
+    </Navbar>
+   
     <TagsView></TagsView>
+   
     <AppMain></AppMain>
   </div>
 </template>

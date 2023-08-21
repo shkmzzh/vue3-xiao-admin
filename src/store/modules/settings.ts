@@ -14,7 +14,7 @@ export const useSettingsStore = defineStore('setting', () => {
   const themeColor = useStorage<number>('themeColor', defaultSettings.themeColor)
   const sideStyle = useStorage<string>('sideStyle', defaultSettings.sideStyle)
 
-  const prevLayout = ref<string>()
+  const prevLayout = ref<string>(layout.value)
   // actions
   function changeSetting(param: { key: string; value: any }) {
     const { key, value } = param

@@ -40,9 +40,12 @@ const show = ref(false)
 
 <template>
   <div class="navbar">
-    <div class="flex items-center">
-      <hamburger :is-active="appStore.sidebar.opened" @toggleClick="toggleSideBar" />
-      <breadcrumb />
+    <div class="flex items-center zzh">
+      <!-- <hamburger :is-active="appStore.sidebar.opened" @toggleClick="toggleSideBar" /> -->
+      <!-- <breadcrumb /> -->
+     
+      <slot name="layout"></slot>
+     
     </div>
     <div class="flex items-center">
       <div v-if="device !== 'mobile'" class="flex items-center">
@@ -52,6 +55,7 @@ const show = ref(false)
           <size-select class="navbar-setting-item" />
         </el-tooltip> -->
         <!--语言选择-->
+        
         <lang-select class="navbar-setting-item" />
         <el-dropdown trigger="click" class="dropdown">
           <span class="el-dropdown-link navbar-bg-hover select-none">
@@ -81,6 +85,11 @@ const show = ref(false)
 </template>
 
 <style lang="scss" scoped>
+.zzh{
+  border: 1px solid red;
+  width: 100%;
+  flex: 1;
+}
 .navbar {
   background-color: #fff;
   height: 50px;

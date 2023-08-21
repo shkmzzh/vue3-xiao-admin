@@ -20,4 +20,8 @@ function add() {
   </div>
 </template>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+h1{
+  color: var(--el-color-primary);
+}
+</style>

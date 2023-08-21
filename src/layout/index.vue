@@ -37,7 +37,7 @@ const classObj = computed(() => ({
 // watchEffect 该钩子函数 页面一加载就会执行 ，函数中的依赖项发生变化时会重新执行
 watchEffect(() => {
   if (width.value < WIDTH) {
-    // 小于 992 为 移动端 收起侧边栏
+    // 小于 768 为 移动端 收起侧边栏
     appStore.toggleDevice('mobile')
     appStore.closeSideBar(true)
     settingsStore.changeSetting({ key: 'layout', value: 'left' })
@@ -49,7 +49,6 @@ watchEffect(() => {
     }
     // 大于为桌面端
     appStore.toggleDevice('desktop')
-    console.log(settingsStore.layout)
 
     if (width.value >= 1200) {
       //大屏
@@ -63,6 +62,10 @@ watchEffect(() => {
 function handleOutsideClick() {
   appStore.closeSideBar(false)
 }
+
+function toggleSideBar() {
+  appStore.toggleSidebar(true)
+}
 </script>
 
 <template>
@@ -73,7 +76,12 @@ function handleOutsideClick() {
 
     <div :class="{ hasTagsView: showTagsView }" class="main-container">
       <div :class="{ 'fixed-header': fixedHeader }">
-        <navbar />
+        <navbar>
+          <template #layout>
+            <hamburger :is-active="appStore.sidebar.opened" @toggleClick="toggleSideBar" />
+            <breadcrumb />
+          </template>
+        </navbar>
         <tags-view v-if="showTagsView" />
       </div>
 

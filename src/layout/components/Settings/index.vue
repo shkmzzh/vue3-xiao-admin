@@ -22,8 +22,11 @@ const toggleDark = () => {
  * 切换布局
  */
 function changeLayout(layout: string) {
+  console.log('111')
+
   settingsStore.changeSetting({ key: 'layout', value: layout })
   window.document.body.setAttribute('layout', settingsStore.layout)
+  settingsStore.changeSetting({ key: 'prevLayout', value: layout })
 }
 /**
  * 切换侧边栏风格
@@ -58,7 +61,7 @@ const activeColor = ref<number>(0)
  * 切换主题颜色
  */
 
- /** 设置 `element-plus` 主题色 */
+/** 设置 `element-plus` 主题色 */
 function setPropertyPrimary(mode: string, i: number, color: string) {
   document.documentElement.style.setProperty(
     `--el-color-primary-${mode}-${i}`,
@@ -70,7 +73,7 @@ watch(
   isDark,
   (newVal, oldVal) => {
     for (let i = 1; i <= 2; i++) {
-      setPropertyPrimary( 'dark', i, themeColorList.value[Number(settingsStore.themeColor)].themeColor)
+      setPropertyPrimary('dark', i, themeColorList.value[Number(settingsStore.themeColor)].themeColor)
     }
     for (let i = 1; i <= 9; i++) {
       setPropertyPrimary('light', i, themeColorList.value[Number(settingsStore.themeColor)].themeColor)
@@ -83,7 +86,7 @@ watch(
 
 /** 设置 系统主题色 */
 function changeThemeColor(color: MenuObject, index: number) {
-  MenuObjectSaveKey.forEach(key => document.documentElement.style.removeProperty(key))
+  MenuObjectSaveKey.forEach((key) => document.documentElement.style.removeProperty(key))
   const styleList: MenuObjectUse[] = []
   for (const [key, value] of Object.entries(color)) {
     if (MenuObjectSaveKey.has(key))
@@ -92,7 +95,7 @@ function changeThemeColor(color: MenuObject, index: number) {
         value: value // #xxx
       })
   }
-  styleList.forEach(item => document.documentElement.style.setProperty(item.key, item.value))
+  styleList.forEach((item) => document.documentElement.style.setProperty(item.key, item.value))
   document.documentElement.style.setProperty('--el-color-primary', color.themeColor)
   for (let i = 1; i <= 2; i++) {
     setPropertyPrimary('dark', i, color.themeColor)

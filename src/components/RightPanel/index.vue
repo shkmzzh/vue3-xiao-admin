@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { onBeforeUnmount, onMounted, ref, watch, defineProps, defineEmits } from 'vue'
+import { onBeforeUnmount, onMounted, ref, watch} from 'vue'
 
 import { addClass, removeClass } from '@/utils/index'
 const props = defineProps<{

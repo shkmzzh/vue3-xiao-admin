@@ -34,8 +34,6 @@ const classObj = computed(() => ({
   mobile: appStore.device === 'mobile' // 响应式配置
 }))
 
-const prevLayout = ref('top')
-
 // watchEffect 该钩子函数 页面一加载就会执行 ，函数中的依赖项发生变化时会重新执行
 watchEffect(() => {
   if (width.value < WIDTH) {
@@ -44,13 +42,16 @@ watchEffect(() => {
     appStore.closeSideBar(true)
     settingsStore.changeSetting({ key: 'layout', value: 'left' })
   } else {
+    console.log(settingsStore.layout,'5555151515155',settingsStore.prevLayout);
+    
+    if ( settingsStore.prevLayout!==settingsStore.layout) {
+      settingsStore.changeSetting({ key: 'layout', value: settingsStore.prevLayout })
+    }
     // 大于为桌面端
     appStore.toggleDevice('desktop')
-    console.log(settingsStore.layout);
-    
-   
+    console.log(settingsStore.layout)
+
     if (width.value >= 1200) {
-      // settingsStore.changeSetting({ key: 'layout', value: prevLayout.value})
       //大屏
       appStore.openSideBar(true)
     } else {

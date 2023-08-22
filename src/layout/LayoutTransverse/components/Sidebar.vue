@@ -2,8 +2,8 @@
 import { useRoute } from 'vue-router'
 
 import SidebarItem from '@/layout/components/Sidebar/SidebarItem.vue'
-import Logo from '@/layout/components/Sidebar/Logo.vue'
 
+import Logo from '@/layout/components/Sidebar/Logo.vue'
 import { useSettingsStore } from '@/store/modules/settings'
 import { usePermissionStore } from '@/store/modules/permission'
 import { useAppStore } from '@/store/modules/app'
@@ -14,26 +14,20 @@ const settingsStore = useSettingsStore()
 const permissionStore = usePermissionStore()
 const appStore = useAppStore()
 
-const { sidebarLogo } = storeToRefs(settingsStore)
 const route = useRoute()
 
 console.log(settingsStore.layout, '布局方式')
 </script>
 
 <template>
-  <div :class="{ 'has-logo': sidebarLogo }">
-    <!-- <logo v-if="sidebarLogo" :collapse="!appStore.sidebar.opened" /> -->
-
     <el-menu
       :default-active="route.path"
-      :collapse="!appStore.sidebar.opened"
       :background-color="variables.menuBg"
       :text-color="variables.menuText"
       :active-text-color="variables.menuActiveText"
       :unique-opened="false"
       :collapse-transition="false"
       mode="horizontal"
-      :ellipsis="false"
     >
       <sidebar-item
         v-for="route in permissionStore.routes"
@@ -43,21 +37,6 @@ console.log(settingsStore.layout, '布局方式')
         :is-collapse="!appStore.sidebar.opened"
       />
     </el-menu>
-  </div>
-</template>
 
-<style lang="scss" scoped>
-:deep(.el-menu) {
-  height: 50px;
-  border: 1px solid pink;
-  .el-menu-item {
-    height: 50px;
-  }
-  .el-sub-menu {
-    height: 50px;
-    .el-sub-menu__title {
-      height: 50px;
-    }
-  }
-}
-</style>
+</template>
+<style lang="scss" scoped></style>

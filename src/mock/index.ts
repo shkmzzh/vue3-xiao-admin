@@ -7,7 +7,7 @@ let users: { username: string; password: string }[] = JSON.parse(
   localStorage.getItem(USERS_KEY) || '[]',
 );
 
-Mock.mock('/register', 'post', (options) => {
+Mock.mock('/register', 'post', (options:any) => {
   const body = JSON.parse(options.body);
   const { username, password } = body;
   const user = users.find((item) => item.username === username);
@@ -30,7 +30,7 @@ Mock.mock('/register', 'post', (options) => {
 });
 
 // 登录
-Mock.mock('/login', 'post', (options) => {
+Mock.mock('/login', 'post', (options:any) => {
   const body = JSON.parse(options.body);
   const { username, password } = body;
   const user = users.find((item) => item.username === username && item.password === password);
@@ -64,7 +64,7 @@ Mock.mock('/test', 'get', {
       meta: {
         title: '组件封装',
         icon: 'menu',
-        hidden: true,
+        hidden: false,
         roles: ['ROOT']
       },
       keepAlive: true,
@@ -77,6 +77,206 @@ Mock.mock('/test', 'get', {
           keepAlive: true
         }
       ]
-    }
+    },
+    {
+      path: '/demo',
+      component: 'Layout',
+      meta: {
+        title: '组件封装',
+        icon: 'menu',
+        hidden: false,
+        roles: ['ROOT']
+      },
+      keepAlive: true,
+      children: [
+        {
+          path: 'kun',
+          component: 'demo/kun',
+          name: 'kun',
+          meta: { title: '厉不厉害你坤哥', icon: '', hidden: false, roles: ['ROOT'] },
+          keepAlive: true
+        }
+      ]
+    },
+    {
+      path: '/demo',
+      component: 'Layout',
+      meta: {
+        title: '组件封装',
+        icon: 'menu',
+        hidden: false,
+        roles: ['ROOT']
+      },
+      keepAlive: true,
+      children: [
+        {
+          path: 'kun',
+          component: 'demo/kun',
+          name: 'kun',
+          meta: { title: '厉不厉害你坤哥', icon: '', hidden: false, roles: ['ROOT'] },
+          keepAlive: true
+        }
+      ]
+    },
+    {
+      path: '/demo',
+      component: 'Layout',
+      meta: {
+        title: '组件封装',
+        icon: 'menu',
+        hidden: false,
+        roles: ['ROOT']
+      },
+      keepAlive: true,
+      children: [
+        {
+          path: 'kun',
+          component: 'demo/kun',
+          name: 'kun',
+          meta: { title: '厉不厉害你坤哥', icon: '', hidden: false, roles: ['ROOT'] },
+          keepAlive: true
+        }
+      ]
+    },
+    {
+      path: '/demo',
+      component: 'Layout',
+      meta: {
+        title: '组件封装',
+        icon: 'menu',
+        hidden: false,
+        roles: ['ROOT']
+      },
+      keepAlive: true,
+      children: [
+        {
+          path: 'kun',
+          component: 'demo/kun',
+          name: 'kun',
+          meta: { title: '厉不厉害你坤哥', icon: '', hidden: false, roles: ['ROOT'] },
+          keepAlive: true
+        }
+      ]
+    },
+    {
+      path: '/demo',
+      component: 'Layout',
+      meta: {
+        title: '组件封装',
+        icon: 'menu',
+        hidden: false,
+        roles: ['ROOT']
+      },
+      keepAlive: true,
+      children: [
+        {
+          path: 'kun',
+          component: 'demo/kun',
+          name: 'kun',
+          meta: { title: '厉不厉害你坤哥', icon: '', hidden: false, roles: ['ROOT'] },
+          keepAlive: true
+        }
+      ]
+    },
+    {
+      path: '/demo',
+      component: 'Layout',
+      meta: {
+        title: '组件封装',
+        icon: 'menu',
+        hidden: false,
+        roles: ['ROOT']
+      },
+      keepAlive: true,
+      children: [
+        {
+          path: 'kun',
+          component: 'demo/kun',
+          name: 'kun',
+          meta: { title: '厉不厉害你坤哥', icon: '', hidden: false, roles: ['ROOT'] },
+          keepAlive: true
+        }
+      ]
+    },
+    {
+      path: '/demo',
+      component: 'Layout',
+      meta: {
+        title: '组件封装',
+        icon: 'menu',
+        hidden: false,
+        roles: ['ROOT']
+      },
+      keepAlive: true,
+      children: [
+        {
+          path: 'kun',
+          component: 'demo/kun',
+          name: 'kun',
+          meta: { title: '厉不厉害你坤哥', icon: '', hidden: false, roles: ['ROOT'] },
+          keepAlive: true
+        }
+      ]
+    },
+    {
+      path: '/demo',
+      component: 'Layout',
+      meta: {
+        title: '组件封装',
+        icon: 'menu',
+        hidden: false,
+        roles: ['ROOT']
+      },
+      keepAlive: true,
+      children: [
+        {
+          path: 'kun',
+          component: 'demo/kun',
+          name: 'kun',
+          meta: { title: '厉不厉害你坤哥', icon: '', hidden: false, roles: ['ROOT'] },
+          keepAlive: true
+        }
+      ]
+    },
+    {
+      path: '/demo',
+      component: 'Layout',
+      meta: {
+        title: '组件封装',
+        icon: 'menu',
+        hidden: false,
+        roles: ['ROOT']
+      },
+      keepAlive: true,
+      children: [
+        {
+          path: 'kun',
+          component: 'demo/kun',
+          name: 'kun',
+          meta: { title: '厉不厉害你坤哥', icon: '', hidden: false, roles: ['ROOT'] },
+          keepAlive: true
+        }
+      ]
+    },
+    {
+      path: '/demo',
+      component: 'Layout',
+      meta: {
+        title: '组件封装',
+        icon: 'menu',
+        hidden: false,
+        roles: ['ROOT']
+      },
+      keepAlive: true,
+      children: [
+        {
+          path: 'kun',
+          component: 'demo/kun',
+          name: 'kun',
+          meta: { title: '厉不厉害你坤哥', icon: '', hidden: false, roles: ['ROOT'] },
+          keepAlive: true
+        }
+      ]
+    },
   ]
 })

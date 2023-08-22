@@ -39,23 +39,18 @@ const show = ref(false)
 </script>
 
 <template>
-  <div class="navbar">
+  <div class="navbar" :class="{ isTop: settingsStore.layout ==='top' }">
+    <slot name="logo"></slot>
     <div class="flex items-center zzh">
-      <!-- <hamburger :is-active="appStore.sidebar.opened" @toggleClick="toggleSideBar" /> -->
-      <!-- <breadcrumb /> -->
-     
       <slot name="layout"></slot>
-     
     </div>
     <div class="flex items-center">
       <div v-if="device !== 'mobile'" class="flex items-center">
-        <screenfull class="navbar-setting-item  screenfull" />
-        <!-- 布局大小 -->
+        <screenfull class="navbar-setting-item screenfull" />
         <!-- <el-tooltip content="布局大小" effect="dark" placement="bottom">
           <size-select class="navbar-setting-item" />
         </el-tooltip> -->
-        <!--语言选择-->
-        
+      
         <lang-select class="navbar-setting-item" />
         <el-dropdown trigger="click" class="dropdown">
           <span class="el-dropdown-link navbar-bg-hover select-none">
@@ -85,9 +80,8 @@ const show = ref(false)
 </template>
 
 <style lang="scss" scoped>
-.zzh{
-  border: 1px solid red;
-  width: 100%;
+.zzh {
+  width: 25%;
   flex: 1;
 }
 .navbar {
@@ -112,8 +106,8 @@ const show = ref(false)
       background: rgb(244, 245, 246);
     }
   }
-  .screenfull{
-    font-size: 17px;
+  .screenfull {
+    font-size: 18px;
   }
 
   .setting {
@@ -146,4 +140,28 @@ const show = ref(false)
       border-radius: 50%;
     }
   }
-}</style>
+}
+.isTop{
+  background-color: var(--menuBg);
+  color: #fff;
+  overflow: hidden;
+
+  .screenfull ,.navbar-setting-item,.setting{
+    min-width: 45px;
+    color: #fff;
+    &:hover {
+      background: var(--el-color-primary-light-1);
+    }
+  }
+  .el-dropdown-link{
+    &:hover {
+      background: var(--el-color-primary-light-1);
+    }
+
+    p {
+     
+      color: #fff;
+    }
+  }
+}
+</style>

@@ -6,7 +6,6 @@ const settingsStore = useSettingsStore();
 defineProps({
   collapse: {
     type: Boolean,
-    required: true
   }
 });
 
@@ -22,7 +21,7 @@ const logo = ref(new URL(`../../../assets/logo.png`, import.meta.url).href);
       </router-link>
 
       <router-link v-else key="expand" class="h-full w-full flex items-center justify-center" to="/">
-        <img v-if="settingsStore.sidebarLogo" :src="logo" />
+        <img :src="logo" />
         <span class="sidebar-title">XiaoAdmin</span>
       </router-link>
     </transition>

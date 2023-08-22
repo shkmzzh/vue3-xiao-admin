@@ -39,7 +39,7 @@ watch(
 
 <template>
   <div :class="{ 'has-logo': sidebarLogo }">
-    <!-- <logo v-if="sidebarLogo" :collapse="!appStore.sidebar.opened" /> -->
+    <logo v-if="sidebarLogo" :collapse="!appStore.sidebar.opened" />
     <el-scrollbar>
       <el-menu
         :default-active="route.path"

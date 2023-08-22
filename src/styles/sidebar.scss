@@ -18,7 +18,8 @@
     z-index: 1001;
     overflow: hidden;
     box-shadow: 0 0 6px -3px var(--el-color-primary);
-    .el-menu-item,.el-sub-menu__title {
+    .el-menu-item,
+    .el-sub-menu__title {
       height: $muenItemHeight !important;
     }
     // reset element-ui css
@@ -82,6 +83,19 @@
       &:hover {
         background-color: $subMenuHover !important;
       }
+    }
+
+    .el-menu-item.is-active::before {
+      content: '';
+      display: block;
+      width: 90%;
+      height: 90%;
+      background-color: $subMenuActiveBg !important;
+      position: absolute;
+      top: 5%;
+      left: 5%;
+      z-index: 0;
+      border-radius: 5px;
     }
   }
 
@@ -206,6 +220,16 @@
   }
 }
 
+.el-menu--horizontal{
+  .nest-menu .el-sub-menu > .el-sub-menu__title,
+  .el-menu-item {
+    &:hover {
+      // you can use $subMenuHover
+      background-color: red;
+    }
+  }
+}
+
 // menuActiveCss
 .el-menu-item.is-active::before {
   content: '';
@@ -214,10 +238,9 @@
   height: 90%;
   background-color: $subMenuActiveBg !important;
   position: absolute;
-  top: 5%;
+  // top: 5%;
   left: 5%;
   z-index: 0;
-
   border-radius: 5px;
 }
 .el-menu-item.is-active {
@@ -230,29 +253,30 @@
 }
 .el-menu-item,
 .el-submenu__title {
-  height: 55px;
+  height: 50px;
   list-style: 50px;
 }
 .el-menu-item {
-    &:hover {
-      color: $subMenuHoverText;
-    }
-    .svg-icon{
-      font-size: 16px;
-    }
+  &:hover {
+    color: $subMenuHoverText;
+  }
+  .svg-icon {
+    font-size: 16px;
+  }
 }
 
 .el-sub-menu {
-  .el-sub-menu__title{
-    .svg-icon{
+  .el-sub-menu__title {
+    .svg-icon {
       font-size: 16px;
     }
-    .el-sub-menu__icon-arrow{
+    .el-sub-menu__icon-arrow {
       font-size: 16px;
-
     }
   }
 }
-.el-button{
+.el-button {
   color: var(--el-color-primary);
 }
+
+

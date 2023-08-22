@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { useRoute } from 'vue-router'
 
 import SidebarItem from '@/layout/components/Sidebar/SidebarItem.vue'
@@ -18,34 +18,46 @@ const { sidebarLogo } = storeToRefs(settingsStore)
 const route = useRoute()
 
 console.log(settingsStore.layout, '布局方式')
-
 </script>
 
 <template>
-  <div :class="{ 'has-logo': sidebarLogo }" class="flex justify-center" >
-    <logo v-if="sidebarLogo" :collapse="!appStore.sidebar.opened" />
-    <el-scrollbar>
-      <el-menu
-        :default-active="route.path"
-        :collapse="!appStore.sidebar.opened"
-        :background-color="variables.menuBg"
-        :text-color="variables.menuText"
-        :active-text-color="variables.menuActiveText"
-        :unique-opened="false"
-        :collapse-transition="false"
-        mode="horizontal"
-        :ellipsis="false"
-      >                          
-        <sidebar-item
-          v-for="route in permissionStore.routes"
-          :item="route"
-          :key="route.path"
-          :base-path="route.path"
-          :is-collapse="!appStore.sidebar.opened"
-        />
-      </el-menu>
-    </el-scrollbar>
+  <div :class="{ 'has-logo': sidebarLogo }">
+    <!-- <logo v-if="sidebarLogo" :collapse="!appStore.sidebar.opened" /> -->
+
+    <el-menu
+      :default-active="route.path"
+      :collapse="!appStore.sidebar.opened"
+      :background-color="variables.menuBg"
+      :text-color="variables.menuText"
+      :active-text-color="variables.menuActiveText"
+      :unique-opened="false"
+      :collapse-transition="false"
+      mode="horizontal"
+      :ellipsis="false"
+    >
+      <sidebar-item
+        v-for="route in permissionStore.routes"
+        :item="route"
+        :key="route.path"
+        :base-path="route.path"
+        :is-collapse="!appStore.sidebar.opened"
+      />
+    </el-menu>
   </div>
 </template>
 
-
+<style lang="scss" scoped>
+:deep(.el-menu) {
+  height: 50px;
+  border: 1px solid pink;
+  .el-menu-item {
+    height: 50px;
+  }
+  .el-sub-menu {
+    height: 50px;
+    .el-sub-menu__title {
+      height: 50px;
+    }
+  }
+}
+</style>

@@ -44,54 +44,53 @@ watchEffect(() => {
 </script>
 
 <template>
-  <div class="layout-transverse app-wrapper" >
-    <div :class="{ 'fixed-header': fixedHeader }" class="main-container">
-      <Navbar>
-        <template #logo>
-          <Logo class="transverse-logo"/>
-        </template>
-        <template #layout>
-          <Sidebar class="sidebar-transverse"/>
-        </template>
-      </Navbar>
+  <div class="layout-transverse app-wrapper">
+    <div class="main-transverse">
+      <div class="zzh" v-if="fixedHeader"></div>
+      <div :class="{ 'fixed-header': fixedHeader }">
+       
+        <Navbar>
+          <template #logo>
+            <Logo class="transverse-logo" />
+          </template>
+          <template #layout>
+            <Sidebar class="sidebar-transverse" />
+          </template>
+        </Navbar>
+        <TagsView v-if="showTagsView"></TagsView>
+      </div>
     </div>
-    <TagsView v-if="showTagsView"></TagsView>
+
     <AppMain></AppMain>
   </div>
 </template>
 
 <style scoped lang="scss">
-
 .layout-transverse {
   width: 100%;
 }
 
-.app-wrapper {
-  &:after {
-    content: '';
-    display: table;
-    clear: both;
-  }
-
-  position: relative;
-  height: 100%;
+.zzh{
   width: 100%;
-
-  &.mobile.openSidebar {
-    position: fixed;
-    top: 0;
-  }
+  height: 50px;
+  border: 1px solid red;
 }
+.main-transverse {
+  position: relative;
+}
+
 .fixed-header {
   position: fixed;
   top: 0;
-  right: 0;
+  left: 0;
   z-index: 9;
-  width: calc(100% - #{$sideBarWidth});
+  width: calc(100%);
+  height: calc(100% - 80px);
   transition: width 0.28s;
 }
 .hideSidebar .fixed-header {
-  width: calc(100% - 54px);
+  height: calc(100% - 80px);
+  width: calc(100%);
 }
 .mobile .fixed-header {
   width: 100%;
@@ -134,9 +133,6 @@ watchEffect(() => {
         background-color: $subMenuHover !important;
       }
     }
-
-
-   
   }
 
   :deep(.el-menu-item.is-active)::before {
@@ -146,9 +142,9 @@ watchEffect(() => {
     height: 6%;
     background-color: $subMenuActiveBg !important;
     position: absolute;
-   
+
     z-index: 0;
-    bottom: 5% ;
+    bottom: 5%;
     left: 0;
     border-radius: 1px;
   }

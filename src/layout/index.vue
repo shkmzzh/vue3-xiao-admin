@@ -89,7 +89,7 @@ function toggleSideBar() {
     </div>
   </div>
   <div class="LayoutTransverse">
-    <LayoutTransverse v-if="settingsStore.layout === 'top'"></LayoutTransverse>
+    <LayoutTransverse></LayoutTransverse>
   </div>
 </template>
 

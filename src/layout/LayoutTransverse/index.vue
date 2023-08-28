@@ -72,7 +72,7 @@ watchEffect(() => {
 
 .zzh{
   width: 100%;
-  height: 50px;
+  height: auto;
   border: 1px solid red;
 }
 .main-transverse {
@@ -85,11 +85,9 @@ watchEffect(() => {
   left: 0;
   z-index: 9;
   width: calc(100%);
-  height: calc(100% - 80px);
   transition: width 0.28s;
 }
 .hideSidebar .fixed-header {
-  height: calc(100% - 80px);
   width: calc(100%);
 }
 .mobile .fixed-header {

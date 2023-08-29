@@ -10,7 +10,6 @@ import Logo from './components/Sidebar/Logo.vue'
 import { useAppStore } from '@/store/modules/app'
 import { useSettingsStore } from '@/store/modules/settings'
 
-
 const { width } = useWindowSize()
 
 /**
@@ -78,19 +77,18 @@ function toggleSideBar() {
     <LeftMenu class="sidebar-container" v-if="settingsStore.layout !== 'top'"></LeftMenu>
 
     <div :class="{ hasTagsView: showTagsView, 'main-container': layout !== 'top' }">
-
-      <div :class="{ 'fixed-header': fixedHeader }" v-if="layout === 'left'">
-          <navbar>
-            <template #layout>
-              <hamburger :is-active="appStore.sidebar.opened" @toggleClick="toggleSideBar" />
-              <breadcrumb />
-            </template>
-          </navbar>
-          <tags-view v-if="showTagsView" />
+      <div :class="{ 'fixed-header': fixedHeader }" v-show="layout === 'left'">
+        <navbar>
+          <template #layout>
+            <hamburger :is-active="appStore.sidebar.opened" @toggleClick="toggleSideBar" />
+            <breadcrumb />
+          </template>
+        </navbar>
+        <tags-view v-if="showTagsView" />
       </div>
 
       <!-- 顶部模式 -->
-      <div :class="{ 'fixed-header-top': fixedHeader }" v-else>
+      <div :class="{ 'fixed-header-top': fixedHeader && layout !=='mix', 'fixed-header': layout === 'mix' && fixedHeader}"  v-if="layout !== 'left'">
         <navbar>
           <template #logo v-if="layout === 'top'">
             <Logo class="top-logo" />
@@ -131,7 +129,6 @@ function toggleSideBar() {
   right: 0;
   z-index: 9;
   width: calc(100% - #{$sideBarWidth});
-  transition: width 0.28s;
 }
 .hideSidebar .fixed-header {
   width: calc(100% - 54px);
@@ -158,7 +155,6 @@ function toggleSideBar() {
   right: 0;
   z-index: 9;
   width: 100%;
-  transition: width 0.28s;
 }
 .top-logo {
   width: 210px;

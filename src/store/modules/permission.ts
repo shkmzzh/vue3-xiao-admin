@@ -105,5 +105,17 @@ export const usePermissionStore = defineStore('permission', () => {
         })
     })
   }
-  return { routes, setRoutes, generateRoutes, hasRouter }
+
+  /**
+   * 混合模式左侧菜单
+   */
+  const mixLeftMenu = ref<RouteRecordRaw[]>([]);
+  function getMixLeftMenu(activeTop: string) {
+    routes.value.forEach((item) => {
+      if (item.path === activeTop) {
+        mixLeftMenu.value = item.children || [];
+      }
+    });
+  }
+  return { routes, setRoutes, generateRoutes, hasRouter,mixLeftMenu,getMixLeftMenu }
 })

@@ -39,4 +39,8 @@ console.log(settingsStore.layout, '布局方式')
     </el-menu>
 
 </template>
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.el-menu{
+  height: 50px !important;
+}
+</style>

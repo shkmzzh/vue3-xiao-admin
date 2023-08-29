@@ -109,6 +109,12 @@ function toggleSideBar() {
       <app-main />
     </div>
   </div>
+<<<<<<< HEAD
+=======
+  <div class="LayoutTransverse">
+    <LayoutTransverse></LayoutTransverse>
+  </div>
+>>>>>>> 2592d69f45458371faf3aa544e5b02a36aa25ecd
 </template>
 
 <style lang="scss" scoped>

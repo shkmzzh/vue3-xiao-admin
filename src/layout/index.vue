@@ -2,7 +2,11 @@
 import { computed, watchEffect } from 'vue'
 import { useWindowSize } from '@vueuse/core'
 import { AppMain, Navbar, Settings, TagsView } from './components/index'
-import Sidebar from './components/Sidebar/index.vue'
+// import Sidebar from './components/Sidebar/index.vue'
+
+import LeftMenu from './components/Sidebar/LeftMenu.vue'
+import TopMenu from './components/Sidebar/TopMenu.vue'
+import Logo from './components/Sidebar/Logo.vue'
 
 import { useAppStore } from '@/store/modules/app'
 import { useSettingsStore } from '@/store/modules/settings'
@@ -23,6 +27,7 @@ const WIDTH = 768
 const appStore = useAppStore()
 const settingsStore = useSettingsStore()
 
+const layout = computed(() => settingsStore.layout)
 const fixedHeader = computed(() => settingsStore.fixedHeader)
 const showTagsView = computed(() => settingsStore.tagsView)
 const showSettings = computed(() => settingsStore.showSettings)
@@ -42,9 +47,9 @@ watchEffect(() => {
     appStore.closeSideBar(true)
     settingsStore.changeSetting({ key: 'layout', value: 'left' })
   } else {
-    console.log(settingsStore.layout,'5555151515155',settingsStore.prevLayout);
-    
-    if ( settingsStore.prevLayout!==settingsStore.layout) {
+    console.log(settingsStore.layout, '5555151515155', settingsStore.prevLayout)
+
+    if (settingsStore.prevLayout !== settingsStore.layout) {
       settingsStore.changeSetting({ key: 'layout', value: settingsStore.prevLayout })
     }
     // 大于为桌面端
@@ -69,27 +74,40 @@ function toggleSideBar() {
 </script>
 
 <template>
-  <div :class="classObj" class="app-wrapper" v-if="settingsStore.layout === 'left'">
+  <div :class="classObj" class="app-wrapper">
     <div v-if="classObj.mobile && classObj.openSidebar" class="drawer-bg" @click="handleOutsideClick"></div>
 
-    <Sidebar class="sidebar-container" />
+    <!-- <Sidebar class="sidebar-container" /> -->
+    <LeftMenu class="sidebar-container" v-if="settingsStore.layout !== 'top'"></LeftMenu>
 
-    <div :class="{ hasTagsView: showTagsView }" class="main-container">
+    <div :class="{ hasTagsView: showTagsView, 'main-container': layout !== 'top' }">
       <div :class="{ 'fixed-header': fixedHeader }">
-        <navbar>
-          <template #layout>
-            <hamburger :is-active="appStore.sidebar.opened" @toggleClick="toggleSideBar" />
-            <breadcrumb />
-          </template>
-        </navbar>
+        <template v-if="settingsStore.layout === 'left'">
+          <navbar>
+            <template #layout>
+              <hamburger :is-active="appStore.sidebar.opened" @toggleClick="toggleSideBar" />
+              <breadcrumb />
+            </template>
+          </navbar>
+        </template>
+
+        <!-- 顶部模式 -->
+        <template v-else>
+          <navbar>
+            <template #logo v-if="layout==='top'">
+              <Logo class="top-logo" />
+            </template>
+            <template #layout>
+              <TopMenu class="sidebar-top"></TopMenu>
+            </template>
+          </navbar>
+        </template>
+
         <tags-view v-if="showTagsView" />
       </div>
 
       <app-main />
     </div>
-  </div>
-  <div class="LayoutTransverse">
-    <LayoutTransverse v-if="settingsStore.layout === 'top'"></LayoutTransverse>
   </div>
 </template>
 
@@ -116,7 +134,7 @@ function toggleSideBar() {
   top: 0;
   right: 0;
   z-index: 9;
-  width: calc(100% - #{$sideBarWidth});
+  // width: calc(100% - #{$sideBarWidth});
   transition: width 0.28s;
 }
 .hideSidebar .fixed-header {
@@ -134,5 +152,50 @@ function toggleSideBar() {
   height: 100%;
   position: absolute;
   z-index: 999;
+}
+
+// 顶部模式样式
+.top-logo {
+  width: 210px;
+}
+
+.sidebar-top {
+  width: 100%;
+  :deep(.el-menu) {
+    // menu hover
+    .el-sub-menu__title {
+      &:hover {
+        background-color: $menuHover !important;
+      }
+    }
+
+    .is-active > .el-sub-menu__title {
+      color: red !important;
+    }
+
+    & .nest-menu .el-sub-menu > .el-sub-menu__title,
+    & .el-sub-menu .el-menu-item {
+      min-width: $sideBarWidth !important;
+      background-color: transparent;
+
+      &:hover {
+        background-color: $subMenuHover !important;
+      }
+    }
+  }
+
+  :deep(.el-menu-item.is-active)::before {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 6%;
+    background-color: $subMenuActiveBg !important;
+    position: absolute;
+
+    z-index: 0;
+    bottom: 5%;
+    left: 0;
+    border-radius: 1px;
+  }
 }
 </style>

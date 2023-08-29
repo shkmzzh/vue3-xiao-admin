@@ -2,7 +2,6 @@
 import { computed, watchEffect } from 'vue'
 import { useWindowSize } from '@vueuse/core'
 import { AppMain, Navbar, Settings, TagsView } from './components/index'
-// import Sidebar from './components/Sidebar/index.vue'
 
 import LeftMenu from './components/Sidebar/LeftMenu.vue'
 import TopMenu from './components/Sidebar/TopMenu.vue'
@@ -11,7 +10,6 @@ import Logo from './components/Sidebar/Logo.vue'
 import { useAppStore } from '@/store/modules/app'
 import { useSettingsStore } from '@/store/modules/settings'
 
-import LayoutTransverse from './LayoutTransverse/index.vue'
 
 const { width } = useWindowSize()
 
@@ -55,7 +53,7 @@ watchEffect(() => {
     // 大于为桌面端
     appStore.toggleDevice('desktop')
 
-    if (width.value >= 1200) {
+    if (width.value >= 992) {
       //大屏
       appStore.openSideBar(true)
     } else {
@@ -77,32 +75,30 @@ function toggleSideBar() {
   <div :class="classObj" class="app-wrapper">
     <div v-if="classObj.mobile && classObj.openSidebar" class="drawer-bg" @click="handleOutsideClick"></div>
 
-    <!-- <Sidebar class="sidebar-container" /> -->
     <LeftMenu class="sidebar-container" v-if="settingsStore.layout !== 'top'"></LeftMenu>
 
     <div :class="{ hasTagsView: showTagsView, 'main-container': layout !== 'top' }">
-      <div :class="{ 'fixed-header': fixedHeader }">
-        <template v-if="settingsStore.layout === 'left'">
+
+      <div :class="{ 'fixed-header': fixedHeader }" v-if="layout === 'left'">
           <navbar>
             <template #layout>
               <hamburger :is-active="appStore.sidebar.opened" @toggleClick="toggleSideBar" />
               <breadcrumb />
             </template>
           </navbar>
-        </template>
+          <tags-view v-if="showTagsView" />
+      </div>
 
-        <!-- 顶部模式 -->
-        <template v-else>
-          <navbar>
-            <template #logo v-if="layout==='top'">
-              <Logo class="top-logo" />
-            </template>
-            <template #layout>
-              <TopMenu class="sidebar-top"></TopMenu>
-            </template>
-          </navbar>
-        </template>
-
+      <!-- 顶部模式 -->
+      <div :class="{ 'fixed-header-top': fixedHeader }" v-else>
+        <navbar>
+          <template #logo v-if="layout === 'top'">
+            <Logo class="top-logo" />
+          </template>
+          <template #layout>
+            <TopMenu class="sidebar-top"></TopMenu>
+          </template>
+        </navbar>
         <tags-view v-if="showTagsView" />
       </div>
 
@@ -134,7 +130,7 @@ function toggleSideBar() {
   top: 0;
   right: 0;
   z-index: 9;
-  // width: calc(100% - #{$sideBarWidth});
+  width: calc(100% - #{$sideBarWidth});
   transition: width 0.28s;
 }
 .hideSidebar .fixed-header {
@@ -155,6 +151,15 @@ function toggleSideBar() {
 }
 
 // 顶部模式样式
+
+.fixed-header-top {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 9;
+  width: 100%;
+  transition: width 0.28s;
+}
 .top-logo {
   width: 210px;
 }

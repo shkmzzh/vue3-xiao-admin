@@ -17,24 +17,6 @@ const appStore = useAppStore()
 const { sidebarLogo } = storeToRefs(settingsStore)
 const route = useRoute()
 
-console.log(settingsStore.layout, '布局方式')
-
-// function changeLayoutHandel() {
-//   if (settingsStore.layout === 'left') {
-//     return 'vertical'
-//   } else if (settingsStore.layout === 'top') {
-//     return 'horizontal'
-//   }
-// }
-
-// watch(
-//   () => {
-//     settingsStore.layout
-//   },
-//   () => {
-//     changeLayoutHandel()
-//   }
-// )
 </script>
 
 <template>
@@ -62,3 +44,8 @@ console.log(settingsStore.layout, '布局方式')
     </el-scrollbar>
   </div>
 </template>
+<style lang="scss" scoped>
+.el-menu {
+  height: 50px !important;
+}
+</style>

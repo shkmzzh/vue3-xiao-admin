@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 
 import SidebarItem from './SidebarItem.vue'
 
@@ -13,18 +13,71 @@ const settingsStore = useSettingsStore()
 const permissionStore = usePermissionStore()
 const appStore = useAppStore()
 const route = useRoute()
+const router = useRouter()
+
+const activePath = computed(() => appStore.activeTopMenu)
+
+function goFirst(menu: any[]) {
+  if (!menu.length) return
+  const [first] = menu
+  if (first.children) {
+    goFirst(first.children)
+  } else {
+    router.push({
+      name: first.name
+    })
+  }
+}
+
+function selectMenu(index: string) {
+  console.log(activePath.value)
+  console.log(index)
+  console.log(permissionStore.routes)
+
+  appStore.changeTopActive(index)
+  permissionStore.getMixLeftMenu(index)
+  const { mixLeftMenu } = permissionStore
+  goFirst(mixLeftMenu)
+}
+
+const topMenu = ref<any[]>([])
+onMounted(() => {
+  console.log(permissionStore.routes)
+
+  topMenu.value = permissionStore.routes.filter((item) => !item.meta || !item.meta.hidden)
+})
 </script>
 
 <template>
   <el-scrollbar>
     <el-menu
-      :default-active="route.path"
+      mode="horizontal"
+      :default-active="activePath"
       :background-color="variables.menuBg"
       :text-color="variables.menuText"
       :active-text-color="variables.menuActiveText"
-      mode="horizontal"
+      @select="selectMenu"
     >
-      <sidebar-item v-for="route in permissionStore.routes" :item="route" :key="route.path" :base-path="route.path" />
+
+    <el-menu-item
+        v-for="route in topMenu"
+        :key="route.path"
+        :index="route.path"
+      >
+        <template #title>
+          <svg-icon
+            v-if="route.meta && route.meta.icon"
+            :icon-class="route.meta.icon"
+          />
+          <span v-if="route.path === '/'"> 首页 </span>
+          <template v-else>
+            <span v-if="route.meta && route.meta.title">
+              {{ route.meta.title }}
+            </span>
+          </template>
+        </template>
+      </el-menu-item>
+      <!-- <sidebar-item v-for="route in topMenu" :item="route" :key="route.path" :base-path="route.path" :is-collapse="false" /> -->
     </el-menu>
   </el-scrollbar>
 </template>
@@ -33,7 +86,7 @@ const route = useRoute()
   height: 50px !important;
   --el-menu-item-height: 50px;
 }
-.el-menu--horizontal{
+.el-menu--horizontal {
   border: 0;
 }
 </style>

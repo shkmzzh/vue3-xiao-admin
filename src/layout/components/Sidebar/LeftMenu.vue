@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { useRoute } from 'vue-router'
-
+import { useRoute ,RouteRecordRaw} from 'vue-router'
+import { isExternal } from "@/utils/index";
 import SidebarItem from './SidebarItem.vue'
 import Logo from './Logo.vue'
-
+import path from "path-browserify";
 import { useSettingsStore } from '@/store/modules/settings'
 import { usePermissionStore } from '@/store/modules/permission'
 import { useAppStore } from '@/store/modules/app'
@@ -21,6 +21,39 @@ const route = useRoute()
 function toggleSideBar() {
   appStore.toggleSidebar(true)
 }
+const props = defineProps({
+  menuList: {
+    required: true,
+    default: () => {
+      return [];
+    },
+    type: Array<any>,
+  },
+  basePath: {
+    type: String,
+    required: true,
+  },
+});
+
+
+/**
+ * 解析路径
+ *
+ * @param routePath 路由路径
+ */
+ function resolvePath(routePath: string) {
+  if (isExternal(routePath)) {
+    return routePath;
+  }
+  if (isExternal(props.basePath)) {
+    return props.basePath;
+  }
+
+  // 完整路径 = 父级路径(/level/level_3) + 路由路径
+  const fullPath = path.resolve(props.basePath, routePath); // 相对路径 → 绝对路径
+  return fullPath;  
+}
+
 </script>
 
 <template>
@@ -37,10 +70,10 @@ function toggleSideBar() {
         :collapse-transition="false"
       >
         <sidebar-item
-          v-for="route in permissionStore.routes"
+          v-for="route in menuList"
           :item="route"
           :key="route.path"
-          :base-path="route.path"
+          :base-path="resolvePath(route.path)"
           :is-collapse="!appStore.sidebar.opened"
         />
       </el-menu>

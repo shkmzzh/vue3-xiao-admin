@@ -2,7 +2,7 @@ import { RouteRecordRaw } from 'vue-router'
 import { defineStore } from 'pinia'
 import { constantRoutes } from '@/router'
 import { getAsyncRoutes } from '@/api/menu/index'
-
+import {useSettingsStore} from '@/store/modules/settings'
 const modules = import.meta.glob('../../views/**/**.vue')
 const Layout = () => import('@/layout/index.vue')
 
@@ -20,7 +20,7 @@ const hasPermission = (roles: string[], route: RouteRecordRaw) => {
     if (roles.includes('ROOT')) {
       return true
     }
-    return roles.some(role => {
+    return roles.some((role) => {
       if (route.meta?.roles !== undefined) {
         return (route.meta.roles as string[]).includes(role)
       }
@@ -39,7 +39,7 @@ const hasPermission = (roles: string[], route: RouteRecordRaw) => {
 const filterAsyncRoutes = (routes: RouteRecordRaw[], roles: string[]) => {
   const asyncRoutes: RouteRecordRaw[] = []
 
-  routes.forEach(route => {
+  routes.forEach((route) => {
     const tmpRoute = { ...route } // ES6扩展运算符复制新对象
     console.log(tmpRoute)
     // 判断用户(角色)是否有该路由的访问权限  hasPermission() 判断当前角色是否有该路由权限 有返回true 没有false
@@ -100,22 +100,23 @@ export const usePermissionStore = defineStore('permission', () => {
           setRoutes(accessedRoutes)
           resolve(accessedRoutes)
         })
-        .catch(error => {
+        .catch((error) => {
           reject(error)
         })
     })
   }
 
   /**
-   * 混合模式左侧菜单
+   * 混合模式左侧菜单 
+   * @info 通过当前父级路径来筛选出父级对应子级路径
    */
-  const mixLeftMenu = ref<RouteRecordRaw[]>([]);
+  const mixLeftMenu = ref<RouteRecordRaw[]>([])
   function getMixLeftMenu(activeTop: string) {
     routes.value.forEach((item) => {
       if (item.path === activeTop) {
-        mixLeftMenu.value = item.children || [];
+        mixLeftMenu.value = item.children || []
       }
-    });
+    })
   }
-  return { routes, setRoutes, generateRoutes, hasRouter,mixLeftMenu,getMixLeftMenu }
+  return { routes, hasRouter, mixLeftMenu, setRoutes, generateRoutes, getMixLeftMenu }
 })

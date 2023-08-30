@@ -2,6 +2,7 @@
 import { computed, watchEffect } from 'vue'
 import { useWindowSize } from '@vueuse/core'
 import { AppMain, Navbar, Settings, TagsView } from './components/index'
+import {RouteRecordRaw} from 'vue-router'
 
 import LeftMenu from './components/Sidebar/LeftMenu.vue'
 import TopMenu from './components/Sidebar/TopMenu.vue'
@@ -9,8 +10,8 @@ import Logo from './components/Sidebar/Logo.vue'
 
 import { useAppStore } from '@/store/modules/app'
 import { useSettingsStore } from '@/store/modules/settings'
-import { usePermissionStore } from "@/store/modules/permission";
-const permissionStore = usePermissionStore();
+import { usePermissionStore } from '@/store/modules/permission'
+const permissionStore = usePermissionStore()
 const { width } = useWindowSize()
 
 /**
@@ -30,28 +31,44 @@ const fixedHeader = computed(() => settingsStore.fixedHeader)
 const showTagsView = computed(() => settingsStore.tagsView)
 const showSettings = computed(() => settingsStore.showSettings)
 
-
 const activeTopMenu = computed(() => {
-  return appStore.activeTopMenu;
-});
+  return appStore.activeTopMenu
+})
 // 混合模式左侧菜单
 const mixLeftMenu = computed(() => {
-  return permissionStore.mixLeftMenu;
-});
+  return permissionStore.mixLeftMenu
+})
 
 watch(
   () => activeTopMenu.value,
-  (newVal) => {
-    console.log(newVal);
-    
-    if (layout.value !== "mix") return;
-    permissionStore.getMixLeftMenu(newVal);
+  newVal => {
+    console.log(newVal)
+
+    if (layout.value !== 'mix') return
+    permissionStore.getMixLeftMenu(newVal)
   },
   {
     deep: true,
-    immediate: true,
+    immediate: true
   }
-);
+)
+
+const LeftMenuList = ref()
+watch(
+  () => layout.value,
+  newVal => {
+    if (layout.value !== 'mix'){
+      LeftMenuList.value =permissionStore.routes
+    }else{
+      LeftMenuList.value=permissionStore.mixLeftMenu
+    }
+    
+  },
+  {
+    deep: true,
+    immediate: true
+  }
+)
 
 const classObj = computed(() => ({
   hideSidebar: !appStore.sidebar.opened, // 隐藏侧边栏
@@ -92,15 +109,14 @@ function handleOutsideClick() {
 function toggleSideBar() {
   appStore.toggleSidebar(true)
 }
-
-
 </script>
 
 <template>
   <div :class="classObj" class="app-wrapper">
     <div v-if="classObj.mobile && classObj.openSidebar" class="drawer-bg" @click="handleOutsideClick"></div>
 
-    <LeftMenu :menu-list="mixLeftMenu" :base-path="activeTopMenu" class="sidebar-container" v-if="settingsStore.layout !== 'top'"></LeftMenu>
+    <LeftMenu :menu-list="permissionStore.routes" :base-path="activeTopMenu" class="sidebar-container" v-if="settingsStore.layout !== 'top'"></LeftMenu>
+    <LeftMenu :menu-list="mixLeftMenu" :base-path="activeTopMenu" class="sidebar-container" v-if="settingsStore.layout === 'mix'"></LeftMenu>
 
     <div :class="{ hasTagsView: showTagsView, 'main-container': layout !== 'top' }">
       <div :class="{ 'fixed-header': fixedHeader }" v-show="layout === 'left'">

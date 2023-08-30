@@ -220,7 +220,7 @@
   }
 }
 
-.el-menu--horizontal{
+.el-menu--horizontal {
   .nest-menu .el-sub-menu > .el-sub-menu__title,
   .el-menu-item {
     &:hover {
@@ -230,7 +230,7 @@
   }
 }
 
-// menuActiveCss
+// menuActive style
 .el-menu-item.is-active::before {
   content: '';
   display: block;
@@ -278,5 +278,3 @@
 .el-button {
   color: var(--el-color-primary);
 }
-
-

@@ -14,9 +14,13 @@ const settingsStore = useSettingsStore()
 const permissionStore = usePermissionStore()
 const appStore = useAppStore()
 
+const layout = computed(() => settingsStore.layout)
 const { sidebarLogo } = storeToRefs(settingsStore)
 const route = useRoute()
 
+function toggleSideBar() {
+  appStore.toggleSidebar(true)
+}
 </script>
 
 <template>
@@ -31,7 +35,6 @@ const route = useRoute()
         :active-text-color="variables.menuActiveText"
         :unique-opened="false"
         :collapse-transition="false"
-        
       >
         <sidebar-item
           v-for="route in permissionStore.routes"
@@ -41,6 +44,23 @@ const route = useRoute()
           :is-collapse="!appStore.sidebar.opened"
         />
       </el-menu>
+      <div class="hamburger-bottom" v-if="layout === 'mix'">
+        <hamburger :is-active="appStore.sidebar.opened" @toggleClick="toggleSideBar" />
+      </div>
     </el-scrollbar>
   </div>
 </template>
+
+<style lang="scss" scoped>
+.hamburger-bottom {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  box-shadow: 0 0 6px -2px var(--el-color-primary);
+  div {
+    :deep(svg) {
+      color: var(--el-color-primary) !important;
+    }
+  }
+}
+</style>

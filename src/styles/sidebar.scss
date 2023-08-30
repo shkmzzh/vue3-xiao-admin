@@ -221,6 +221,9 @@
 }
 
 .el-menu--horizontal {
+  .svg-icon {
+    margin-right: 8px;
+  }
   .nest-menu .el-sub-menu > .el-sub-menu__title,
   .el-menu-item {
     &:hover {

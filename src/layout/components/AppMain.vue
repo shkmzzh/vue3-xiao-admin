@@ -29,7 +29,9 @@ const tagsViewStore = useTagsViewStore();
 .fixed-header + .app-main {
   padding-top: 50px;
 }
-
+.fixed-header-top + .app-main {
+  padding-top: 50px;
+}
 .hasTagsView {
   .app-main {
     /* 84 = navbar + tags-view = 50 + 34 */
@@ -37,6 +39,10 @@ const tagsViewStore = useTagsViewStore();
   }
 
   .fixed-header + .app-main {
+    padding-top: 84px;
+    min-height: 100vh;
+  }
+  .fixed-header-top + .app-main {
     padding-top: 84px;
     min-height: 100vh;
   }

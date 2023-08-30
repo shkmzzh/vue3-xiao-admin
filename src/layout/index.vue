@@ -88,7 +88,7 @@ function toggleSideBar() {
       </div>
 
       <!-- 顶部模式 -->
-      <div :class="{ 'fixed-header-top': fixedHeader && layout !=='mix', 'fixed-header': layout === 'mix' && fixedHeader}"  v-if="layout !== 'left'">
+      <div :class="{ 'fixed-header-top': fixedHeader && layout !== 'mix', 'fixed-header': layout === 'mix' && fixedHeader }" v-if="layout !== 'left'">
         <navbar>
           <template #logo v-if="layout === 'top'">
             <Logo class="top-logo" />
@@ -161,6 +161,9 @@ function toggleSideBar() {
 }
 
 .sidebar-top {
+  .scrollbar-wrapper {
+    overflow-x: hidden !important;
+  }
   width: 100%;
   :deep(.el-menu) {
     // menu hover
@@ -194,7 +197,7 @@ function toggleSideBar() {
     position: absolute;
 
     z-index: 0;
-    bottom: 5%;
+    bottom: 0;
     left: 0;
     border-radius: 1px;
   }

@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { computed, watchEffect } from 'vue'
 import { useWindowSize } from '@vueuse/core'
-import { AppMain, Navbar, Settings, TagsView } from './components/index'
-import {RouteRecordRaw} from 'vue-router'
+import { AppMain, Navbar, TagsView } from './components/index'
 
 import LeftMenu from './components/Sidebar/LeftMenu.vue'
 import TopMenu from './components/Sidebar/TopMenu.vue'
+import MixMenu from './components/Sidebar/MixMenu.vue'
 import Logo from './components/Sidebar/Logo.vue'
 
 import { useAppStore } from '@/store/modules/app'
@@ -53,22 +53,6 @@ watch(
   }
 )
 
-const LeftMenuList = ref()
-watch(
-  () => layout.value,
-  newVal => {
-    if (layout.value !== 'mix'){
-      LeftMenuList.value =permissionStore.routes
-    }else{
-      LeftMenuList.value=permissionStore.mixLeftMenu
-    }
-    
-  },
-  {
-    deep: true,
-    immediate: true
-  }
-)
 
 const classObj = computed(() => ({
   hideSidebar: !appStore.sidebar.opened, // 隐藏侧边栏
@@ -135,8 +119,11 @@ function toggleSideBar() {
           <template #logo v-if="layout === 'top'">
             <Logo class="top-logo" />
           </template>
-          <template #layout>
+          <template #layout v-if="layout ==='top'">
             <TopMenu class="sidebar-top"></TopMenu>
+          </template>
+          <template #layout v-if="layout ==='mix'">
+            <MixMenu class="sidebar-top"></MixMenu>
           </template>
         </navbar>
         <tags-view v-if="showTagsView" />

@@ -2,7 +2,7 @@ import { RouteRecordRaw } from 'vue-router'
 import { defineStore } from 'pinia'
 import { constantRoutes } from '@/router'
 import { getAsyncRoutes } from '@/api/menu/index'
-import {useSettingsStore} from '@/store/modules/settings'
+import { useSettingsStore } from '@/store/modules/settings'
 const modules = import.meta.glob('../../views/**/**.vue')
 const Layout = () => import('@/layout/index.vue')
 
@@ -107,16 +107,19 @@ export const usePermissionStore = defineStore('permission', () => {
   }
 
   /**
-   * 混合模式左侧菜单 
+   * 混合模式左侧菜单
    * @info 通过当前父级路径来筛选出父级对应子级路径
    */
   const mixLeftMenu = ref<RouteRecordRaw[]>([])
+
   function getMixLeftMenu(activeTop: string) {
-    routes.value.forEach((item) => {
-      if (item.path === activeTop) {
-        mixLeftMenu.value = item.children || []
-      }
-    })
+    const activeRoute = routes.value.find((item) => item.path === activeTop)
+
+    if (activeRoute) {
+      mixLeftMenu.value = activeRoute.children || []
+    } else {
+      mixLeftMenu.value = []
+    }
   }
   return { routes, hasRouter, mixLeftMenu, setRoutes, generateRoutes, getMixLeftMenu }
 })

@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import { useSettingsStore } from '@/store/modules/settings'
+import { useAppStore } from '@/store/modules/app'
+import { usePermissionStore } from '@/store/modules/permission'
+import { useRoute } from 'vue-router'
 import sunnyIcon from '@/assets/icons/sunny.svg'
 import moonIcon from '@/assets/icons/moon.svg'
 import { themeColorList, MenuObject } from '@/layout/components/theme'
@@ -18,15 +21,54 @@ const toggleDark = () => {
   }
 }
 
+const appStore = useAppStore()
+const permissionStore = usePermissionStore()
+function findOutermostParent(tree: any[], findName: string) {
+  let parentMap: any = {}
+
+  function buildParentMap(node: any, parent: any) {
+    parentMap[node.name] = parent
+
+    if (node.children) {
+      for (let i = 0; i < node.children.length; i++) {
+        buildParentMap(node.children[i], node)
+      }
+    }
+  }
+
+  for (let i = 0; i < tree.length; i++) {
+    buildParentMap(tree[i], null)
+  }
+
+  let currentNode = parentMap[findName]
+  while (currentNode) {
+    if (!parentMap[currentNode.name]) {
+      return currentNode
+    }
+    currentNode = parentMap[currentNode.name]
+  }
+
+  return null
+}
+const againActiveTop = (newVal: string) => {
+  const parent = findOutermostParent(permissionStore.routes, newVal)
+  if (appStore.activeTopMenu !== parent.path) {
+    appStore.changeTopActive(parent.path)
+  }
+}
+const route = useRoute()
+
 /**
  * 切换布局
  */
 function changeLayout(layout: string) {
-  console.log('111')
-
   settingsStore.changeSetting({ key: 'layout', value: layout })
   window.document.body.setAttribute('layout', settingsStore.layout)
   settingsStore.changeSetting({ key: 'prevLayout', value: layout })
+
+  if (layout === 'mix') {
+    route.name && againActiveTop(route.name as string)
+  }
 }
 /**
  * 切换侧边栏风格

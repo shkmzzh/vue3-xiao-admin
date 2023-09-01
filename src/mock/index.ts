@@ -62,9 +62,9 @@ Mock.mock('/test', 'get', {
       path: '/demo',
       component: 'Layout',
       meta: {
-        title: '组件封装',
+        title: '厉不厉害你坤哥',
         icon: 'menu',
-        hidden: false,
+       
         roles: ['ROOT']
       },
       keepAlive: true,
@@ -73,7 +73,14 @@ Mock.mock('/test', 'get', {
           path: 'kun',
           component: 'demo/kun',
           name: 'kun',
-          meta: { title: '厉不厉害你坤哥', icon: '', hidden: false, roles: ['ROOT'] },
+          meta: { title: '厉不厉', icon: '',  roles: ['ROOT'] },
+          keepAlive: true
+        },
+        {
+          path: 'kun',
+          component: 'demo/kun',
+          name: 'kun',
+          meta: { title: '你坤哥', icon: '',  roles: ['ROOT'] },
           keepAlive: true
         }
       ]

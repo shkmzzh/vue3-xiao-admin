@@ -1,17 +1,15 @@
 <script setup lang="ts">
-import { useRoute ,RouteRecordRaw} from 'vue-router'
+import { useRoute} from 'vue-router'
 import { isExternal } from "@/utils/index";
 import SidebarItem from './SidebarItem.vue'
 import Logo from './Logo.vue'
 import path from "path-browserify";
 import { useSettingsStore } from '@/store/modules/settings'
-import { usePermissionStore } from '@/store/modules/permission'
 import { useAppStore } from '@/store/modules/app'
 import { storeToRefs } from 'pinia'
 import variables from '@/styles/variables.module.scss'
 
 const settingsStore = useSettingsStore()
-const permissionStore = usePermissionStore()
 const appStore = useAppStore()
 
 const layout = computed(() => settingsStore.layout)
@@ -34,7 +32,6 @@ const props = defineProps({
     required: true,
   },
 });
-
 
 /**
  * 解析路径

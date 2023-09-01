@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
-import { useRoute, useRouter } from 'vue-router'
 import { useAppStore } from '@/store/modules/app'
-import { useTagsViewStore } from '@/store/modules/tagsView'
 import { useUserStore } from '@/store/modules/user'
 import { useSettingsStore } from '@/store/modules/settings'
 import RightPanel from '@/components/RightPanel/index.vue'
@@ -12,7 +10,6 @@ import { useWindowSize } from '@vueuse/core'
 import { SwitchButton } from '@element-plus/icons-vue'
 
 const { width } = useWindowSize()
-const bol = ref<number>()
 onMounted(() => {
   window.addEventListener('resize', function handleResize() {
     width.value = window.innerWidth
@@ -20,26 +17,19 @@ onMounted(() => {
 })
 
 const settingsStore = useSettingsStore()
-const showSettings = computed(() => settingsStore.showSettings)
 const appStore = useAppStore()
-const tagsViewStore = useTagsViewStore()
 const userStore = useUserStore()
 
-const route = useRoute()
-const router = useRouter()
 
 const { device } = storeToRefs(appStore) // 设备类型：desktop-宽屏设备 || mobile-窄屏设备
 
-function toggleSideBar() {
-  appStore.toggleSidebar(true)
-}
 
 // 设置面板
 const show = ref(false)
 </script>
 
 <template>
-  <div class="navbar" :class="{ isTop: settingsStore.layout ==='top' }">
+  <div class="navbar" :class="{ isTop: settingsStore.layout !=='left' }">
     <slot name="logo"></slot>
     <div class="flex items-center zzh">
       <slot name="layout"></slot>
@@ -100,14 +90,14 @@ const show = ref(false)
     display: inline-block;
     cursor: pointer;
     text-align: center;
-    color: #39393a;
+    color: #1e1e1f;
 
     &:hover {
       background: rgb(244, 245, 246);
     }
   }
   .screenfull {
-    font-size: 18px;
+    font-size: 19px;
   }
 
   .setting {

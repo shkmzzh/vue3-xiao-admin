@@ -231,6 +231,12 @@
       background-color: red;
     }
   }
+  & >.el-menu-item.is-active{
+    border: 0 !important;
+  }
+  &>.el-menu-item.is-active{
+    border: 0 !important;
+  }
 }
 
 // menuActive style

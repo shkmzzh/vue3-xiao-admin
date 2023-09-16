@@ -203,7 +203,7 @@ function toggleSideBar() {
     }
 
     .is-active > .el-sub-menu__title {
-      color: red !important;
+      color: #fff !important;
     }
 
     & .nest-menu .el-sub-menu > .el-sub-menu__title,
@@ -224,7 +224,7 @@ function toggleSideBar() {
     height: 6%;
     background-color: $subMenuActiveBg !important;
     position: absolute;
-
+    color: #af3c3c !important;
     z-index: 0;
     bottom: 0;
     left: 0;

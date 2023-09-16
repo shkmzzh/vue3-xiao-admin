@@ -21,7 +21,7 @@ const route = useRoute()
       :default-active="route.path"
       :background-color="variables.menuBg"
       :text-color="variables.menuText"
-      :active-text-color="variables.menuActiveText"
+      :active-text-color="'red' "
     >
       <sidebar-item v-for="(route,index) in permissionStore.routes" :item="route" :key="index" :base-path="route.path" :is-collapse="false" />
     </el-menu>
@@ -30,6 +30,7 @@ const route = useRoute()
 .el-menu {
   height: 50px !important;
   --el-menu-item-height: 50px;
+  
 }
 .el-menu--horizontal {
   border: 0;

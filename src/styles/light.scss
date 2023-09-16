@@ -1,6 +1,6 @@
 html.light {
   --menuBg: #fff !important;
-  --menuText: #5c6299 !important;
+  --menuText: #51599b !important;
 
   --menuHover: #fff !important;
 
@@ -9,5 +9,10 @@ html.light {
   --subMenuHover: #fff !important;
   --sidebarLogo: #fff !important;
   --subMenuHoverText: var(--el-color-primary) !important;
-  --subMenuActiveBg: #e0ebf6;
+  --menuActiveText: var(--el-color-primary) !important;
+  --subActiveText:#000 !important;
+  .el-menu {
+    --el-menu-hover-bg-color:#fff !important;
+    // --el-menu-active-text-color: #5c6299 !important;
+  }
 }

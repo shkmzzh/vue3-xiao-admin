@@ -10,9 +10,15 @@ html.light {
   --sidebarLogo: #fff !important;
   --subMenuHoverText: var(--el-color-primary) !important;
   --menuActiveText: var(--el-color-primary) !important;
-  --subActiveText:#000 !important;
+
   .el-menu {
-    --el-menu-hover-bg-color:#fff !important;
+    --el-menu-hover-bg-color: #fff !important;
     // --el-menu-active-text-color: #5c6299 !important;
+  }
+  .el-menu--horizontal {
+    --subActiveText: var(--el-color-primary) !important;
+  }
+  .el-menu--horizontal.el-menu--popup-container{
+    --subActiveText:#fff !important;
   }
 }

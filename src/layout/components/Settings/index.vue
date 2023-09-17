@@ -84,7 +84,7 @@ function changeSidebarStyle(style: string) {
 
 // 主题颜色
 const MenuObjectSaveKey: Map<string, string> = new Map<string, string>()
-MenuObjectSaveKey.set('menuBg', '--menuBg')
+MenuObjectSaveKey.set('menuBg', '--menuBg') 
   .set('menuText', '--menuText')
   .set('menuActiveText', 'menuActiveText')
   .set('subMenuBg', '--subMenuBg')

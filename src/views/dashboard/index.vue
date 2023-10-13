@@ -1,108 +1,9 @@
 <script setup lang="ts">
-interface objtype {
-  age: number
-  name: string
-}
-const obj = ref<objtype>({
-  age: 18,
-  name: 'xiao小',
-})
-
-function add() {
-  obj.value.age++
-}
 </script>
 
 <template>
   <div>
-    <h1>welcome {{ obj.age }}</h1>
-    <el-button @click="add"> 添加 </el-button>
-    <div class="main">
-      <div class="left"></div>
-      <div class="right"></div>
-    </div>
-    <p>唱,跳,rep,打篮球</p>
-    <p>唱,跳,rep,打篮球</p>
-    <p>唱,跳,rep,打篮球</p>
-    <p>唱,跳,rep,打篮球</p>
-    <p>唱,跳,rep,打篮球</p>
-    <p>唱,跳,rep,打篮球</p>
-    <p>唱,跳,rep,打篮球</p>
-    <p>唱,跳,rep,打篮球</p>
-    <p>唱,跳,rep,打篮球</p>
-    <p>唱,跳,rep,打篮球</p>
-    <p>唱,跳,rep,打篮球</p>
-    <p>唱,跳,rep,打篮球</p>
-    <p>唱,跳,rep,打篮球</p>
-    <p>唱,跳,rep,打篮球</p>
-    <p>唱,跳,rep,打篮球</p>
-    <p>唱,跳,rep,打篮球</p>
-    <p>唱,跳,rep,打篮球</p>
-    <p>唱,跳,rep,打篮球</p>
-    <p>唱,跳,rep,打篮球</p>
-    <p>唱,跳,rep,打篮球</p>
-    <p>唱,跳,rep,打篮球</p>
-    <p>唱,跳,rep,打篮球</p>
-    <p>唱,跳,rep,打篮球</p>
-    <p>唱,跳,rep,打篮球</p>
-    <p>唱,跳,rep,打篮球</p>
-    <p>唱,跳,rep,打篮球</p>
-    <p>唱,跳,rep,打篮球</p>
-    <p>唱,跳,rep,打篮球</p>
-    <p>唱,跳,rep,打篮球</p>
-    <p>唱,跳,rep,打篮球</p>
-    <p>唱,跳,rep,打篮球</p>
-    <p>唱,跳,rep,打篮球</p>
-    <p>唱,跳,rep,打篮球</p>
-    <p>唱,跳,rep,打篮球</p>
-    <p>唱,跳,rep,打篮球</p>
-    <p>唱,跳,rep,打篮球</p>
-    <p>唱,跳,rep,打篮球</p>
-    <p>唱,跳,rep,打篮球</p>
-    <p>唱,跳,rep,打篮球</p>
-    <p>唱,跳,rep,打篮球</p>
-    <p>唱,跳,rep,打篮球</p>
-    <p>唱,跳,rep,打篮球</p>
-    <p>唱,跳,rep,打篮球</p>
-    <p>唱,跳,rep,打篮球</p>
-    <p>唱,跳,rep,打篮球</p>
-    <p>唱,跳,rep,打篮球</p>
-    <p>唱,跳,rep,打篮球</p>
-    <p>唱,跳,rep,打篮球</p>
-    <p>唱,跳,rep,打篮球</p>
-    <p>唱,跳,rep,打篮球</p>
-    <p>唱,跳,rep,打篮球</p>
-    <p>唱,跳,rep,打篮球</p>
-    <p>唱,跳,rep,打篮球</p>
-    <p>唱,跳,rep,打篮球</p>
-    <p>唱,跳,rep,打篮球</p>
-    <p>唱,跳,rep,打篮球</p>
-    <p>唱,跳,rep,打篮球</p>
-    <p>唱,跳,rep,打篮球</p>
-    <p>唱,跳,rep,打篮球</p>
-    <p>唱,跳,rep,打篮球</p>
-    <p>唱,跳,rep,打篮球</p>
-    <p>唱,跳,rep,打篮球</p>
-    <p>唱,跳,rep,打篮球</p>
-    <p>唱,跳,rep,打篮球</p>
-    <p>唱,跳,rep,打篮球</p>
-    <p>唱,跳,rep,打篮球</p>
-    <p>唱,跳,rep,打篮球</p>
-    <p>唱,跳,rep,打篮球</p>
-    <p>唱,跳,rep,打篮球</p>
-    <p>唱,跳,rep,打篮球</p>
-    <p>唱,跳,rep,打篮球</p>
-    <p>唱,跳,rep,打篮球</p>
-    <p>唱,跳,rep,打篮球</p>
-    <p>唱,跳,rep,打篮球</p>
-    <p>唱,跳,rep,打篮球</p>
-    <p>唱,跳,rep,打篮球</p>
-    <p>唱,跳,rep,打篮球</p>
-    <p>唱,跳,rep,打篮球</p>
-    <p>唱,跳,rep,打篮球</p>
-    <p>唱,跳,rep,打篮球</p>
-    <p>唱,跳,rep,打篮球</p>
-    <p>唱,跳,rep,打篮球</p>
+    <h1>welcome</h1>
   </div>
 </template>
 
@@ -110,20 +11,5 @@ function add() {
 h1{
   color: var(--el-color-primary);
 }
-.main{
-  display: flex;
-  width: 100%;
-  border: 1px solid pink;
-  height: 2px;
-  .left{
-    height: 2px;
-    flex: 1;
-    background-color: green;
-  }
-  .right{
-    background-color: deepskyblue;
-    height: 2px;
-    width: 250px;
-  }         
-}
+
 </style>

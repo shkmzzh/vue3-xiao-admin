@@ -75,11 +75,23 @@ Mock.mock('/test', 'get', {
           meta: { title: '聊天框', icon: '', hidden: false, keepAlive: true, roles: ['ROOT'] }
         },
         {
+          path: 'waterfall',
+          component: 'demo/waterfall/index',
+          name: 'Waterfall',
+          meta: { title: '瀑布流', icon: '', hidden: false, keepAlive: true, roles: ['ROOT'] }
+        },
+        {
+          path: 'upload',
+          component: 'demo/upload/index',
+          name: 'Upload',
+          meta: { title: '文件上传', icon: '', roles: ['ROOT'], hidden: false, keepAlive: true }
+        },
+        {
           path: 'test',
           component: 'demo/test',
           name: 'Test',
           meta: { title: '测试', icon: '', roles: ['ROOT'], hidden: false, keepAlive: true }
-        }
+        },
       ]
     }
   ]

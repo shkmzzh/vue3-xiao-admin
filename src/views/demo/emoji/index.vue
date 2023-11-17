@@ -121,7 +121,7 @@ onMounted(() => {
 function keydownEvent(e) {
   if (e.keyCode === 13) {
     let range = window.getSelection().getRangeAt(0)
-    range.endContainer.setAttribute('name', 'o-input-div---')
+    range.endContainer.setAttribute('name', 'on-enter')
   }
 }
 
@@ -186,7 +186,7 @@ function inputHandle() {
   htmlval.value = RefConent.value.innerHTML
   // textval.value = parseToText(htmlval.value)
   console.log(htmlval.value)
-  textval.value = htmlval.value.replace(new RegExp(/\[[\u4e00-\u9fa5]+\]/, 'g'), '')
+  textval.value = htmlval.value.replace(/(<div name="on-enter"><br><\/div>){2,}/g, "<div name='on-enter'><br></div>");
   console.log(textval.value)
 }
 </script>

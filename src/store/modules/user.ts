@@ -1,13 +1,14 @@
 import { defineStore } from 'pinia';
-import {getLogin} from '@/api/login'
+import {LoginApi} from '@/api/auth'
 import { useStorage } from '@vueuse/core'
 import router from "@/router";
 export const useUserStore = defineStore('user', () => {
   const token = useStorage<string>('token','')
   async function setLogin(val:object){
-  const res = await getLogin(val)
-  
-  token.value =res.data.token
+  const res = await LoginApi(val)
+    console.log(res);
+    
+  token.value ='666666666666666'
   }
  function outLogin(){
     token.value = ''

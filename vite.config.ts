@@ -45,7 +45,7 @@ export default defineConfig(({ command, mode }: ConfigEnv): UserConfig => {
       proxy: {
         [env.VITE_APP_BASE_API]: {
           // 线上接口API地址
-          target: 'http://www.shkmzzh.com',
+          target: 'http://localhost:7756',
           changeOrigin: true,
           rewrite: path => path.replace(new RegExp('^' + env.VITE_APP_BASE_API), '')
         }

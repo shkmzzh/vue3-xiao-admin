@@ -16,11 +16,11 @@ const REGEXP_PWD = /^(?![0-9]+$)(?![a-z]+$)(?![A-Z]+$)(?!([^(0-9a-zA-Z)]|[()])+$
 const rules = ref<FormRules>({
   account: [
     { required: true, message: '用户名', trigger: 'blur' },
-    { pattern: /^[a-zA-Z0-9_]{5,10}$/, message: '用户名应为2-10个字符', trigger: 'blur' }
+    // { pattern: /^[a-zA-Z0-9_]{5,10}$/, message: '用户名应为2-10个字符', trigger: 'blur' }
   ],
   password: [
     { required: true, message: '请输入密码', trigger: 'blur' },
-    { pattern: REGEXP_PWD, message: '密码格式应为8-18位数字、字母、符号的任意两种组合', trigger: 'blur' }
+    // { pattern: REGEXP_PWD, message: '密码格式应为8-18位数字、字母、符号的任意两种组合', trigger: 'blur' }
   ]
 })
 

@@ -1,4 +1,5 @@
 import request from '@/utils/request'
+import {getRefreshToken} from '@/utils/index'
 
 // 注册
 export interface RegisterDataType {
@@ -9,8 +10,16 @@ export interface RegisterDataType {
   confirmPassword: 'string'
   avatar: 'string'
 }
-export const RegisterApi = (data?:object) => request({method:'post',url:'/api/register',data})
+export const RegisterApi = (data?: object) => request({ method: 'post', url: '/api/register', data })
 
 // 登录
 
-export const LoginApi = (data:object)=>request({method:'post',url:'/api/login',data})
+export const LoginApi = (data: object) => request({ method: 'post', url: '/api/login', data })
+
+// 刷新token
+
+export const uploadToken = () => request({ method: 'post', url: '/api/update/token',headers:{Authorization:`Bearer ${getRefreshToken()}`,noToken: true}})
+
+// 获取用户信息
+
+export const userInfoApi = (id?: number) => request({ url: '/api/user/one/info',params:{id}})

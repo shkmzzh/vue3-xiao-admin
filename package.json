@@ -20,6 +20,7 @@
     "cos-js-sdk-v5": "^1.4.21",
     "echarts": "^5.2.2",
     "element-plus": "^2.3.1",
+    "jwt-decode": "^3.1.2",
     "mockjs": "^1.1.0",
     "nprogress": "^0.2.0",
     "path-browserify": "^1.0.1",

@@ -1,3 +1,4 @@
+import jwtDecode from 'jwt-decode'
 /**
  * 用于判断一个元素是否有某个类的方法；
  * @param {HTMLElement} elm
@@ -37,4 +38,11 @@ export function removeClass(ele: HTMLElement, cls: string) {
 export function isExternal(path: string) {
   const isExternal = /^(https?:|http?:|mailto:|tel:)/.test(path)
   return isExternal
+}
+
+// 获取 token
+
+export function getRefreshToken() {
+  const refToken = localStorage.getItem('userInfo') as any
+  return JSON.parse(refToken).refreshToken
 }

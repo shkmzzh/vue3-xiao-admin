@@ -16,7 +16,7 @@ const roles = ['ROOT']
 router.beforeEach(async (to, from, next) => {
 
   NProgress.start()
-  if (userStore.token) {
+  if (userStore.userInfo.accessToken) {
     if (to.path === '/login') {
       // 如果已登录，跳转首页
       next({ path: '/' })

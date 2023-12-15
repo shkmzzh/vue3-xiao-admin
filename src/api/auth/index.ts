@@ -23,3 +23,7 @@ export const uploadToken = () => request({ method: 'post', url: '/api/update/tok
 // 获取用户信息
 
 export const userInfoApi = (id?: number) => request({ url: '/api/user/one/info',params:{id}})
+
+// 获取路由
+
+export const peemAllApi = () => request({ url: '/api/perm/all'})

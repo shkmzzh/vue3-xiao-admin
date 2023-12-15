@@ -1,15 +1,19 @@
 <script setup lang="ts">
-import { uploadToken, userInfoApi } from '@/api/auth/index'
+import { uploadToken, userInfoApi ,peemAllApi} from '@/api/auth/index'
 
 async function changeUploadToken() {
   await uploadToken()
 }
-changeUploadToken()
 
 async function getUserInfo() {
   await userInfoApi()
+  await peemAllApi()
 }
-getUserInfo()
+async function data(){
+  await userInfoApi()
+  await peemAllApi()
+}
+data()
 </script>
 
 <template>

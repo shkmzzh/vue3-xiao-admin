@@ -43,6 +43,7 @@ service.interceptors.response.use(
       // 判断 refreshToken token 的过期时间是否到了,过期了需重新登录
       const userStore = useUserStore()
       if (userStore.userInfo.refExpTime <= Date.now()) {
+        // 执行退出登录逻辑
         ElMessage.error('登录过期需重新登录!')
       } else if (!isRefreshing) {
         try {

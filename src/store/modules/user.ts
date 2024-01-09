@@ -3,13 +3,14 @@ import { LoginApi } from "@/api/auth";
 import { getUserInfoApi } from "@/api/user";
 import { useStorage } from "@vueuse/core";
 import router from "@/router";
-import { UserInfoType } from "@/api/user/types";
+import type{ UserInfoType } from "@/api/user/types";
+import type{ LoginData } from "@/api/auth/types";
 
 export interface TookenType {
   accessToken: string;
   refreshToken: string;
   tokenType: string;
-  expires: any;
+  expires: number;
 }
 export const useUserStore = defineStore("user", () => {
   const TOOKEN = useStorage<TookenType>("TOOKEN", {} as TookenType);
@@ -76,7 +77,7 @@ export const useUserStore = defineStore("user", () => {
   function changeUpdateToken(accessToken: string, refreshToken: string) {
     TOOKEN.value.accessToken = accessToken;
     TOOKEN.value.refreshToken = refreshToken;
-    TOOKEN.value.refExpTime = (jwtDecode(refreshToken) as any)?.exp * 1000 ?? 0;
+    // TOOKEN.value.refExpTime = (jwtDecode(refreshToken) as any)?.exp * 1000 ?? 0;
   }
 
   return {

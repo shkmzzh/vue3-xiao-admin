@@ -18,7 +18,7 @@ service.interceptors.request.use(
 
     if (!config.headers.noToken) {
       // 不是每个接口都需要统一添加 token 或者并不需要Token 不需要的, 在请求头 headers中添加 noToken:true
-      config.headers.Authorization = userStore.userInfo.accessToken
+      config.headers.Authorization = 'Bearer '+ userStore.TOOKEN.accessToken
     }
 
     return config
@@ -42,7 +42,7 @@ service.interceptors.response.use(
     if (responseError.status === 401) {
       // 判断 refreshToken token 的过期时间是否到了,过期了需重新登录
       const userStore = useUserStore()
-      if (userStore.userInfo.refExpTime <= Date.now()) {
+      if (userStore.TOOKEN.refExpTime <= Date.now()) {
         // 执行退出登录逻辑
         ElMessage.error('登录过期需重新登录!')
       } else if (!isRefreshing) {
@@ -59,7 +59,7 @@ service.interceptors.response.use(
           isRefreshing = false
         }
       } else {
-        return retryRequest.listen(responseError)
+        // return retryRequest.listen(responseError)
       }
     } else {
       ElMessage.error(error.response.data.error || '系统出错')

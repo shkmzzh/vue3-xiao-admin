@@ -1,8 +1,11 @@
-import mockservice from '@/utils/mockservice'
+import request from "@/utils/request";
 
-export const getAsyncRoutes = () => {
-  return mockservice({
-    method: 'get',
-    url: '/test'
-  })
+/**
+ * 获取路由列表
+ */
+export function listRoutesApi() {
+  return request({
+    url: "/menus/routes",
+    method: "get",
+  });
 }

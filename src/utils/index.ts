@@ -42,7 +42,7 @@ export function isExternal(path: string) {
 
 // 获取 token
 
-export function getRefreshToken() {
-  const refToken = localStorage.getItem('userInfo') as any
-  return JSON.parse(refToken).refreshToken
-}
+// export function getRefreshToken() {
+//   const refToken = localStorage.getItem('userInfo') as any
+//   return JSON.parse(refToken).refreshToken
+// }

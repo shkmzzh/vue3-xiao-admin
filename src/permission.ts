@@ -1,6 +1,7 @@
 import router from '@/router'
 import pinia from '@/store'
 import { usePermissionStore } from '@/store/modules/permission'
+
 import { useUserStore } from '@/store'
 
 import NProgress from 'nprogress'
@@ -12,11 +13,11 @@ const permissionStore = usePermissionStore(pinia)
 const  userStore = useUserStore()
 // 白名单路由
 const whiteList = ['/login']
-const roles = ['ROOT']
 router.beforeEach(async (to, from, next) => {
 
   NProgress.start()
-  if (userStore.userInfo.accessToken) {
+  // const hasToken = 
+  if (userStore.TOOKEN.accessToken) {
     if (to.path === '/login') {
       // 如果已登录，跳转首页
       next({ path: '/' })
@@ -30,17 +31,18 @@ router.beforeEach(async (to, from, next) => {
         } else {
           next()
         }
-      } else {
+      } else {  
         try {
-          // const { roles } = await userStore.getInfo()
-          const accessRoutes = await permissionStore.generateRoutes(['ROOT'])
+          const {roles} = await userStore.getUserInfo()
+          console.log(roles,'dasdasdasd');
+          const accessRoutes = await permissionStore.generateRoutes(roles)
           accessRoutes.forEach(route => {
             router.addRoute(route)
           })
           next({ ...to, replace: true })
         } catch (error) {
           // 移除 token 并跳转登录页
-          // await userStore.resetToken()
+          await userStore.outLogin()
           next(`/login?redirect=${to.path}`)
           NProgress.done()
         }

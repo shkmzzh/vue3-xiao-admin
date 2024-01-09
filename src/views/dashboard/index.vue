@@ -1,5 +1,6 @@
 <script setup lang='ts'>
 import {} from "vue"
+console.log(JSON.parse);
 
 </script>
 

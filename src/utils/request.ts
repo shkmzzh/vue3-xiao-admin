@@ -1,6 +1,6 @@
 import axios, { InternalAxiosRequestConfig, AxiosResponse, AxiosRequestConfig } from 'axios'
 import { useUserStore } from '@/store'
-import { uploadToken } from '@/api/auth/index'
+// import { uploadToken } from '@/api/auth/index'
 
 let isRefreshing = false // 控制是否恢复 token
 // 创建 axios 实例
@@ -31,7 +31,7 @@ service.interceptors.request.use(
 // 响应拦截器
 service.interceptors.response.use(
   (response: AxiosResponse) => {
-    if (response.data.code === 200) {
+    if (response.data.code === 200 || '00000') {
       return response.data
     }
     ElMessage.error(response.data.msg || '系统出错')
@@ -48,11 +48,11 @@ service.interceptors.response.use(
       } else if (!isRefreshing) {
         try {
           isRefreshing = true
-          const res = await uploadToken()
-          if (res?.code === 200) {
-            userStore.changeUpdateToken(res.data.accessToken, res.data.refreshToken)
-            retryRequest.trigger(res.data.accessToken, responseError.config)
-          }
+          // const res = await uploadToken()
+          // if (res?.code === 200) {
+          //   userStore.changeUpdateToken(res.data.accessToken, res.data.refreshToken)
+          //   retryRequest.trigger(res.data.accessToken, responseError.config)
+          // }
         } catch (error) {
           console.log(error)
         } finally {

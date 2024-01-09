@@ -82,7 +82,7 @@ Mock.mock('/test', 'get', {
         },
         {
           path: 'upload',
-          component: 'demo/upload/index',
+          component: 'demo/upload/index',           
           name: 'Upload',
           meta: { title: '文件上传', icon: '', roles: ['ROOT'], hidden: false, keepAlive: true }
         },

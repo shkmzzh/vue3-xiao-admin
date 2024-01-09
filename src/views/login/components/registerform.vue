@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { User, Lock, Iphone,ChatDotRound} from '@element-plus/icons-vue'
 import { FormRules, FormInstance } from 'element-plus'
-import {RegisterApi} from '@/api/auth/index'
+// import {RegisterApi} from '@/api/auth/index'
 const ruleForm = ref({
   account: 'saul',
   password: '123456qq',
@@ -53,7 +53,7 @@ const submitForm = async (formEl: FormInstance | undefined) => {
   if (!formEl) return
   await formEl.validate(async (valid, fields) => {
     if (valid) {
-      await RegisterApi(ruleForm.value)
+      // await RegisterApi(ruleForm.value)
       emit('changeForm', true)
       
     } else {

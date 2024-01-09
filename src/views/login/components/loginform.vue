@@ -7,14 +7,14 @@ import { useRouter } from 'vue-router'
 const router = useRouter()
 const userStore = useUserStore()
 const ruleForm = ref({
-  account: '',
+  username: '',
   password: ''
 })
 
 const REGEXP_PWD = /^(?![0-9]+$)(?![a-z]+$)(?![A-Z]+$)(?!([^(0-9a-zA-Z)]|[()])+$)(?!^.*[\u4E00-\u9FA5].*$)([^(0-9a-zA-Z)]|[()]|[a-z]|[A-Z]|[0-9]){8,18}$/
 
 const rules = ref<FormRules>({
-  account: [
+  username: [
     { required: true, message: '用户名', trigger: 'blur' },
     // { pattern: /^[a-zA-Z0-9_]{5,10}$/, message: '用户名应为2-10个字符', trigger: 'blur' }
   ],
@@ -66,8 +66,8 @@ onBeforeUnmount(() => {
 <template>
   <div class="login-form">
     <el-form ref="ruleFormRef" :model="ruleForm" :rules="rules">
-      <el-form-item prop="account">
-        <el-input :prefix-icon="User" placeholder="用户名" clearable v-model="ruleForm.account"></el-input>
+      <el-form-item prop="username">
+        <el-input :prefix-icon="User" placeholder="用户名" clearable v-model="ruleForm.username"></el-input>
       </el-form-item>
       <el-form-item prop="password">
         <el-input :prefix-icon="Lock" placeholder="密码" clearable type="password" show-password v-model="ruleForm.password"></el-input>
@@ -76,10 +76,10 @@ onBeforeUnmount(() => {
         <el-button type="primary" @click="submitForm(ruleFormRef)">登录</el-button>
       </el-form-item>
     </el-form>
-    <div class="sub-link">
+    <!-- <div class="sub-link">
       <span class="text">还没有帐号? </span>
       <span class="to-create" @click="toCreate">创建新帐号</span>
-    </div>
+    </div> -->
   </div>
 </template>
 

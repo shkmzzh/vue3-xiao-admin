@@ -29,7 +29,8 @@ export const constantRoutes: RouteRecordRaw[] = [
       {
         path: "dashboard",
         component: () => import("@/views/dashboard/index.vue"),
-        name: "dashboard",
+        name: "dashboard",// 用于 keep-alive, 必须与SFC自动推导或者显示声明的组件name一致
+        // https://cn.vuejs.org/guide/built-ins/keep-alive.html#include-exclude
         meta: { title: "首页", icon: "home", affix: true, keepAlive: true },
       },
       {
@@ -90,6 +91,5 @@ const router = createRouter({
  */
 export function resetRouter() {
   router.replace({ path: "/login" });
-  location.reload();
 }
 export default router;

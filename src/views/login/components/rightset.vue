@@ -13,7 +13,7 @@ const toggleDark = () => {
     document.documentElement.classList.add('light')
   }
 }
-// 项目设置文件 不能删除非必要不修改
+// 项目初始化设置文件 不能删除非必要不修改
 </script>
 
 <template>

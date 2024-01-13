@@ -9,7 +9,7 @@ See Vite Configuration Reference.
 ### Project Setup
 
 ```
-yarn install
+pnpm install
 ```
 
 
@@ -17,7 +17,7 @@ yarn install
 ### Compile and Hot-Reload for Development
 
 ```
-yarn dev
+pnpm dev
 ```
 
 

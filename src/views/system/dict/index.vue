@@ -9,7 +9,7 @@ import {
 } from "@/api/dict";
 
 import { DictTypePageVO, DictTypeQuery, DictTypeForm } from "@/api/dict/types";
-
+import dictItem from "./components/dict-item.vue";
 defineOptions({
   name: "DictType",
   inheritAttrs: false,

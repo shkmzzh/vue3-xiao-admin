@@ -49,7 +49,7 @@ const show = ref(false)
           </span>
           <template #dropdown>
             <el-dropdown-menu class="logout">
-              <el-dropdown-item @click="userStore.outLogin">
+              <el-dropdown-item @click="userStore.logout">
                 <el-icon>
                   <SwitchButton />
                 </el-icon>

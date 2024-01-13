@@ -1,3 +1,4 @@
+<!-- 注册 -->
 <script setup lang="ts">
 import { User, Lock, Iphone,ChatDotRound} from '@element-plus/icons-vue'
 import { FormRules, FormInstance } from 'element-plus'

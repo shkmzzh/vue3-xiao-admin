@@ -3,8 +3,9 @@ import { ref } from "vue";
 import { User, Lock } from "@element-plus/icons-vue";
 import type { FormRules, FormInstance } from "element-plus";
 import { useUserStore } from "@/store/modules/user";
-import { useRouter } from "vue-router";
+import { LocationQuery, LocationQueryValue, useRouter, useRoute } from "vue-router";
 const router = useRouter();
+const route = useRoute();
 const userStore = useUserStore();
 const ruleForm = ref({
   username: "",
@@ -33,7 +34,18 @@ const submitForm = async (formEl: FormInstance | undefined) => {
   await formEl.validate((valid, fields) => {
     if (valid) {
       userStore.setLogin(ruleForm.value).then(() => {
-        router.push({ path: "/" });
+        const query: LocationQuery = route.query;
+
+        const redirect = (query.redirect as LocationQueryValue) ?? "/";
+
+        const otherQueryParams = Object.keys(query).reduce((acc: any, cur: string) => {
+          if (cur !== "redirect") {
+            acc[cur] = query[cur];
+          }
+          return acc;
+        }, {});
+
+        router.push({ path: redirect, query: otherQueryParams });
       });
     } else {
       console.log("error submit!", fields);

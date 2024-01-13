@@ -57,6 +57,7 @@ const dialog = reactive({
 // 用户表单数据
 const formData = reactive<UserForm>({
   status: 1,
+  roleIds:[]
 });
 
 // 用户导入数据
@@ -216,6 +217,9 @@ const handleSubmit = useThrottleFn(() => {
             })
             .finally(() => (loading.value = false));
         } else {
+          debugger
+          console.log(formData,'dasdasd');
+          
           addUser(formData)
             .then(() => {
               ElMessage.success("新增用户成功");

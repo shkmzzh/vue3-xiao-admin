@@ -1,19 +1,14 @@
 import { defineStore } from "pinia";
-import { LoginApi } from "@/api/auth";
+import { LoginApi ,logoutApi} from "@/api/auth";
 import { getUserInfoApi } from "@/api/user";
 import { useStorage } from "@vueuse/core";
 import router from "@/router";
 import type{ UserInfoType } from "@/api/user/types";
-import type{ LoginData } from "@/api/auth/types";
+import type{ LoginData , LoginResult} from "@/api/auth/types";
+import { resetRouter } from "@/router";
 
-export interface TookenType {
-  accessToken: string;
-  refreshToken: string;
-  tokenType: string;
-  expires: number;
-}
 export const useUserStore = defineStore("user", () => {
-  const TOOKEN = useStorage<TookenType>("TOOKEN", {} as TookenType);
+  const TOOKEN = useStorage<LoginResult>("TOOKEN", {} as LoginResult);
   const USERINFO: UserInfoType = {
     roles: [],
     perms: [],
@@ -65,13 +60,32 @@ export const useUserStore = defineStore("user", () => {
     });
   }
 
-  // 退出登录
-  function outLogin() {
-    TOOKEN.value = {} as TookenType;
-    // resetRouter()
-    // location.reload()
-    router.replace({ path: "/login" });
+  // user logout
+  function logout() {
+    return new Promise<void>((resolve, reject) => {
+      logoutApi()
+        .then(() => {
+          TOOKEN.value.accessToken = "";
+          location.reload(); // 清空路由
+          resolve();
+        })
+        .catch((error) => {
+          reject(error);
+        });
+    });
   }
+
+  // remove token
+  function resetToken() {
+    return new Promise<void>((resolve) => {
+      TOOKEN.value.accessToken = "";
+      TOOKEN.value.refreshToken = "";
+
+      resetRouter();
+      resolve();
+    });
+  }
+
 
   // 更新 token
   function changeUpdateToken(accessToken: string, refreshToken: string) {
@@ -84,7 +98,8 @@ export const useUserStore = defineStore("user", () => {
     TOOKEN,
     USERINFO,
     setLogin,
-    outLogin,
+    logout,
+    resetToken,
     changeUpdateToken,
     getUserInfo,
   };

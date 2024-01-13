@@ -7,7 +7,7 @@ let isRefreshing = false // 控制是否恢复 token
 const service = axios.create({
   baseURL: import.meta.env.VITE_APP_BASE_API,
   timeout: 50000,
-  headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+  headers: { "Content-Type": "application/json;charset=utf-8" }
 })
 
 // 请求拦截器
@@ -42,7 +42,7 @@ service.interceptors.response.use(
     if (responseError.status === 401) {
       // 判断 refreshToken token 的过期时间是否到了,过期了需重新登录
       const userStore = useUserStore()
-      if (userStore.TOOKEN.expires <= Date.now()) {
+      if (userStore.TOOKEN.expires! <= Date.now()) {
         // 执行退出登录逻辑
         ElMessage.error('登录过期需重新登录!')
       } else if (!isRefreshing) {
@@ -68,7 +68,11 @@ service.interceptors.response.use(
   }
 )
 
-// 将token刷新期间，因为 401 请求失败的接口 ,存入请求队列，刷新成功后重新请求一次（发布-订阅模式）
+/**
+ * token 无感刷新
+ * @notes 将token刷新期间，因为 401 请求失败的接口 ,存入请求队列，刷新成功后重新请求一次（发布-订阅模式）
+ * @author shkmzzh
+ */
 class RetryOldRequest {
   private requestQuery: ((newToken: string) => void)[] = []
 

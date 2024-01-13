@@ -69,7 +69,7 @@ watchEffect(() => {
     appStore.closeSideBar(true)
     settingsStore.changeSetting({ key: 'layout', value: 'left' })
   } else {
-    console.log(settingsStore.layout, '5555151515155', settingsStore.prevLayout)
+    // console.log(settingsStore.layout, '5555151515155', settingsStore.prevLayout)
 
     if (settingsStore.prevLayout !== settingsStore.layout) {
       settingsStore.changeSetting({ key: 'layout', value: settingsStore.prevLayout })

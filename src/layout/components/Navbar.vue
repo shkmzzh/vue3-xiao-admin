@@ -29,7 +29,7 @@ const show = ref(false)
 </script>
 
 <template>
-  <div class="navbar" :class="{ isTop: settingsStore.layout !=='left' }">
+  <div class="navbar" :class="{ isTop: settingsStore.layout !=='left',isLight:settingsStore.sideStyle==='light'}">
     <slot name="logo"></slot>
     <div class="flex items-center zzh">
       <slot name="layout"></slot>
@@ -41,8 +41,9 @@ const show = ref(false)
           <size-select class="navbar-setting-item" />
         </el-tooltip> -->
       
-        <lang-select class="navbar-setting-item" />
-        <el-dropdown trigger="click" class="dropdown">
+      </div>
+      <lang-select class="navbar-setting-item" />
+      <el-dropdown trigger="click" class="dropdown">
           <span class="el-dropdown-link navbar-bg-hover select-none">
             <img src="https://pic3.zhimg.com/80/v2-738a80bf6bfd7adc2a30afc1b3937f34_r.jpg" />
             <p class="out">admin</p>
@@ -58,7 +59,6 @@ const show = ref(false)
             </el-dropdown-menu>
           </template>
         </el-dropdown>
-      </div>
       <div class="setting" @click.stop="show = true">
         <i-ep-setting />
       </div>
@@ -151,6 +151,29 @@ const show = ref(false)
     p {
      
       color: #fff;
+    }
+  }
+}
+.isLight{
+  background-color: var(--menuBg);
+  color: #1e1e1f;
+  overflow: hidden;
+
+  .screenfull ,.navbar-setting-item,.setting{
+    min-width: 45px;
+    color: #1e1e1f;
+    &:hover {
+      background: rgb(244, 245, 246);
+    }
+  }
+  .el-dropdown-link{
+    &:hover {
+      background: rgb(244, 245, 246);
+    }
+
+    p {
+     
+      color: #1e1e1f;
     }
   }
 }

@@ -217,7 +217,7 @@ function toggleSideBar() {
     }
   }
 
-  :deep(.el-menu-item.is-active)::before {
+  :deep(.el-menu-item.is-active)::before ,:deep(.el-sub-menu.is-active >.el-sub-menu__title)::before {
     content: '';
     display: block;
     width: 100%;
